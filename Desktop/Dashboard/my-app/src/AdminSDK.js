@@ -6,7 +6,7 @@ const app = express();
 app.use(bodyParser.json());
 
 // Initialize Firebase Admin SDK
-const serviceAccount = require('./digitalsignage-21521774-firebase-adminsdk-1c4hp-87cd1bef04.json');
+const serviceAccount = require('./Change this code with you key.json');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
