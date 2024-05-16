@@ -131,8 +131,8 @@
 
 // export default AccountManagement;
 import React, { useState, useEffect } from 'react';
-import { createUserWithEmailAndPassword, deleteUser, signInWithEmailAndPassword, updateCurrentUser } from 'firebase/auth';
-import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateCurrentUser, deleteUser } from 'firebase/auth';
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, getDoc } from 'firebase/firestore';
 import { auth } from './firebaseConfig';
 import { ref as dbRef, set as setDB, getDatabase } from 'firebase/database';
 
@@ -150,30 +150,30 @@ const AccountManagement = () => {
     try {
       const originalUser = auth.currentUser;
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-  
+
       await updateCurrentUser(auth, originalUser);
       await addDoc(collection(firestore, 'accounts'), {
         uid: userCredential.user.uid,
         email: email,
         password: password,
-        type: 'ADMIN' // Adding the TYPE field with value 'PLAYER'
+        type: 'ADMIN' // Adding the TYPE field with value 'ADMIN'
       });
-  
+
       // Make HTTP POST request to backend endpoint to grant admin privileges
-      const response = await fetch('/grantAdmin', {
+      const response = await fetch('http://localhost:5000/grantAdmin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ uid: userCredential.user.uid }),
       });
-  
+
       if (response.ok) {
         console.log('Admin privileges granted successfully');
       } else {
         console.error('Error granting admin privileges:', response.statusText);
       }
-  
+
       alert('Account created successfully!');
       setEmail('');
       setPassword('');
@@ -184,7 +184,6 @@ const AccountManagement = () => {
       console.error('Error creating account:', error);
     }
   };
-  
 
   const fetchAccounts = async () => {
     try {
@@ -205,8 +204,29 @@ const AccountManagement = () => {
 
   const handleDeleteAccount = async (accountId, accountUid) => {
     try {
-      await setDB(dbRef(database, `status/${accountUid}`), null);
+      const originalUser = auth.currentUser;
+      const originalToken = await originalUser.getIdToken(true);
+      const userDocRef = doc(firestore, 'accounts', accountId);
+      const userDoc = await getDoc(userDocRef);
+      if (!userDoc.exists()) {
+        throw new Error("User does not exist.");
+      }
+      const { email, password } = userDoc.data();
+
+      // Re-authenticate as this user (highly not recommended)
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const userToDelete = userCredential.user;
+
+      // Delete the user
+      await deleteUser(userToDelete);
+
+      // Delete the account data from Firestore
       await deleteDoc(doc(firestore, 'accounts', accountId));
+
+      // Delete associated data in the Realtime Database
+      await setDB(dbRef(database, `status/${accountUid}`), null);
+      window.location.href = window.location.href;
+      await updateCurrentUser(auth, originalUser);
       fetchAccounts(); // Fetch accounts after deleting one
     } catch (error) {
       console.error('Error deleting account:', error);

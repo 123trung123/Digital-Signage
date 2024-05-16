@@ -321,26 +321,26 @@
 
 // export default Log;
 
-
-
 import React, { useState, useEffect } from 'react';
 import { getStorage, ref, listAll, getMetadata } from 'firebase/storage';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
-import { ref as dbRef, onValue } from 'firebase/database';
-import { storage } from '../firebaseConfig';
+import { ref as dbRef, getDatabase, onValue } from 'firebase/database';
 import './home.css';
-
-const firestore = getFirestore();
 import { Doughnut } from 'react-chartjs-2';
-import {Chart, ArcElement} from 'chart.js'
+import { Chart, ArcElement } from 'chart.js';
+
 Chart.register(ArcElement);
 
-const Log = ({ isOnline, otherMachineStatus }) => {
+const database = getDatabase();
+const firestore = getFirestore();
+
+const Log = ({ otherMachineStatus }) => {
   const [pictures, setPictures] = useState([]);
   const [accounts, setAccounts] = useState([]);
   const [totalSize, setTotalSize] = useState(0); // State to store total size
   const [onlineAdmins, setOnlineAdmins] = useState(0); // State to store count of online admins
   const [onlinePlayers, setOnlinePlayers] = useState(0); // State to store count of online players
+  const [status, setStatus] = useState({}); // State to store the status of machines
 
   useEffect(() => {
     const fetchPicturesMetadata = async () => {
@@ -372,6 +372,17 @@ const Log = ({ isOnline, otherMachineStatus }) => {
   }, []);
 
   useEffect(() => {
+    const statusRef = dbRef(database, 'status');
+    const handleStatusChange = (snapshot) => {
+      const statusData = snapshot.val();
+      setStatus(statusData || {});
+    };
+
+    const unsubscribe = onValue(statusRef, handleStatusChange);
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
     const fetchAccounts = async () => {
       try {
         const accountsRef = collection(firestore, 'accounts');
@@ -380,9 +391,9 @@ const Log = ({ isOnline, otherMachineStatus }) => {
         setAccounts(accountsData);
 
         // Count online admins and players
-        const onlineAdminsCount = accountsData.filter(account => account.type === 'ADMIN' && otherMachineStatus[account.uid]).length;
-        const onlinePlayersCount = accountsData.filter(account => account.type === 'PLAYER' && otherMachineStatus[account.uid]).length;
-        (onlineAdminsCount);
+        const onlineAdminsCount = accountsData.filter(account => account.type === 'ADMIN' && status[account.uid]).length;
+        const onlinePlayersCount = accountsData.filter(account => account.type === 'PLAYER' && status[account.uid]).length;
+        setOnlineAdmins(onlineAdminsCount);
         setOnlinePlayers(onlinePlayersCount);
       } catch (error) {
         console.error('Error fetching accounts:', error);
@@ -390,8 +401,8 @@ const Log = ({ isOnline, otherMachineStatus }) => {
     };
 
     fetchAccounts();
-  }, [otherMachineStatus]); // Trigger effect when otherMachineStatus changes
-  
+  }, [status]); // Trigger effect when status changes
+
   const totalPictures = pictures.length;
   const totalAdmins = accounts.filter(account => account.type === 'ADMIN').length;
   const totalPlayers = accounts.filter(account => account.type === 'PLAYER').length;
@@ -399,6 +410,7 @@ const Log = ({ isOnline, otherMachineStatus }) => {
   const onlineDevices = onlineAdmins + onlinePlayers;
   // Display total size in a user-friendly format (e.g., KB, MB)
   const formattedTotalSize = calculateFileSize(totalSize);
+
   const deviceData = {
     labels: ['Total Devices', 'Online Devices'],
     datasets: [
@@ -409,7 +421,7 @@ const Log = ({ isOnline, otherMachineStatus }) => {
       },
     ],
   };
-  
+
   const adminData = {
     labels: ['Total Admins', 'Admins Online'],
     datasets: [
@@ -420,7 +432,7 @@ const Log = ({ isOnline, otherMachineStatus }) => {
       },
     ],
   };
-  
+
   const playerData = {
     labels: ['Total Players', 'Players Online'],
     datasets: [
@@ -431,12 +443,12 @@ const Log = ({ isOnline, otherMachineStatus }) => {
       },
     ],
   };
-  
+
   return (
     <div className="log-container">
       <div className="log-charts-container">
         <div className="log-chart">
-          <h2 >All-Devices</h2>
+          <h2>All-Devices</h2>
           <Doughnut data={deviceData} />
           <div className="chart-info">
             <p style={{ color: '#FF6384' }}>Total Devices: {totalAccounts}</p>
@@ -444,7 +456,7 @@ const Log = ({ isOnline, otherMachineStatus }) => {
           </div>
         </div>
         <div className="log-chart">
-          <h2 >Admins</h2>
+          <h2>Admins</h2>
           <Doughnut data={adminData} />
           <div className="chart-info">
             <p style={{ color: '#FF6384' }}>Total Admins: {totalAdmins}</p>
@@ -452,7 +464,7 @@ const Log = ({ isOnline, otherMachineStatus }) => {
           </div>
         </div>
         <div className="log-chart">
-          <h2 >Players</h2>
+          <h2>Players</h2>
           <Doughnut data={playerData} />
           <div className="chart-info">
             <p style={{ color: '#FF6384' }}>Total Players: {totalPlayers}</p>
@@ -460,7 +472,7 @@ const Log = ({ isOnline, otherMachineStatus }) => {
           </div>
         </div>
         <div className="log-chart">
-          <h2 >Access</h2>
+          <h2>Access</h2>
           <ul>
             {pictures.map((picture, index) => (
               <li key={index}>
@@ -469,24 +481,33 @@ const Log = ({ isOnline, otherMachineStatus }) => {
             ))}
           </ul>
           <div className="chart-info">
-            <p >Total Access: {totalPictures}</p>
-            <p >Total Storage Used: {formattedTotalSize}</p>
+            <p>Total Access: {totalPictures}</p>
+            <p>Total Storage Used: {formattedTotalSize}</p>
           </div>
         </div>
+      </div>
+      <div>
+        {/* <h2>Online Status</h2>
+        <ul>
+          {accounts.map(account => (
+            <li key={account.uid}>
+              {account.type === 'ADMIN' ? 'Admin' : 'Player'} {account.uid}: {status[account.uid] ? 'Online' : 'Offline'}
+            </li>
+          ))}
+        </ul> */}
       </div>
     </div>
   );
 };
 
-// Function to convert bytes to a user-friendly size format (optional)
 function calculateFileSize(bytes) {
-const units = ['B', 'KB', 'MB'];
-let i = 0;
-while (bytes > 1024 && i < units.length - 1) {
-  bytes /= 1024;
-  ++i;
-}
-return `${bytes.toFixed(1)} ${units[i]}`;
+  const units = ['B', 'KB', 'MB', 'GB', 'TB'];
+  let i = 0;
+  while (bytes > 1024 && i < units.length - 1) {
+    bytes /= 1024;
+    ++i;
+  }
+  return `${bytes.toFixed(1)} ${units[i]}`;
 }
 
 export default Log;

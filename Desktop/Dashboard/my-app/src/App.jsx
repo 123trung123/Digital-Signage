@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link, Navigate } from 'react-router-dom';
 import Signin from './components/auth/Signin';
-import Home from './components/Home';
 import Logs from './components/Logs';
 import Upload from './components/Upload';
 import AccountManagement from './AccountManagement';
@@ -37,10 +36,6 @@ const App = () => {
   const [initialLoad, setInitialLoad] = useState(true); // New flag
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // Function to toggle dark mode
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode); // Toggle the state
-  };
   // useEffect for fetching pins from Realtime Database
   useEffect(() => {
     const unsubscribeRealtimeDB = onValue(setdatabase, (snapshot) => {
@@ -65,7 +60,15 @@ const App = () => {
       });
     });
   }, []);
+  const [navOpen, setNavOpen] = useState(false);
+  
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
 
+  const toggleNav = () => {
+    setNavOpen(!navOpen);
+  };
   // const uploadFile = () => {
   //   if (!user) {
   //     console.log('User not authenticated');
@@ -245,7 +248,7 @@ const App = () => {
   return (
     <BrowserRouter>
     <div className={isDarkMode ? 'app-container dark-mode' : 'app-container'}>
-
+    <div className={`nav ${navOpen ? 'open' : 'hidden'}`}>
         <div className="nav">
           <div className="nav fixed-top">
             <div className="navButtons">
@@ -260,8 +263,8 @@ const App = () => {
               {user && (
                 <>
                   {/* <Link to="/" className="navButton">Home</Link> */}
-                  <Link to="/logs" className="navButton">Dashboard</Link>
-                  <Link to="/upload" className="navButton">Access</Link>
+                  <Link to="/Home" className="navButton">Dashboard</Link>
+                  <Link to="/Access" className="navButton">Access</Link>
                   <Link to="/player" className="navButton">Player</Link>
                   <Link to="/account-management" className="navButton">AdminManager</Link>
                   
@@ -271,13 +274,14 @@ const App = () => {
             <Link onClick={toggleDarkMode} className="navToggleButton">Toggle Dark Mode</Link>
           </div>
         </div>
+        </div>
         <div className="content">
           <Routes>
             
             <Route path="/signin" element={<Signin setUser={setUser} />} />
             {/* <Route path="/" element={<Home user={user} isOnline={isOnline} otherMachineStatus={otherMachineStatus} pins={pins} imageUrls={imageUrls} />} /> */}
-            <Route path="/logs" element={<Logs pins={pins} imageUrls={imageUrls} imageUpload={imageUpload} otherMachineStatus={otherMachineStatus} setImageUpload={setImageUpload} uploadFile={uploadFile} />} />
-            <Route path="/upload" element={<Upload pins={pins} imageUrls={imageUrls} imageUpload={imageUpload} otherMachineStatus={otherMachineStatus} setImageUpload={setImageUpload} uploadFile={uploadFile} uuid={v4()} />} />
+            <Route path="/Home" element={<Logs pins={pins} imageUrls={imageUrls} imageUpload={imageUpload} otherMachineStatus={otherMachineStatus} setImageUpload={setImageUpload} uploadFile={uploadFile} />} />
+            <Route path="/Access" element={<Upload pins={pins} imageUrls={imageUrls} imageUpload={imageUpload} otherMachineStatus={otherMachineStatus} setImageUpload={setImageUpload} uploadFile={uploadFile} uuid={v4()} />} />
             <Route path="/account-management/*" element={
               <>
                 <AdminHome user={user} isOnline={isOnline} otherMachineStatus={otherMachineStatus} pins={pins} imageUrls={imageUrls} />
