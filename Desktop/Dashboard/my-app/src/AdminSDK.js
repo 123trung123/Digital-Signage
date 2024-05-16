@@ -10,7 +10,7 @@ const serviceAccount = require('./digitalsignage-21521774-firebase-adminsdk-1c4h
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: 'https://digitalsignage' // Replace with your database URL
+  databaseURL: 'https://digitalsignage-21521774-default-rtdb.asia-southeast1.firebasedatabase.app' // Replace with your database URL
 });
 
 const db = admin.firestore();
