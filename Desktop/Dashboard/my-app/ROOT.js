@@ -1,6 +1,6 @@
 const admin = require('firebase-admin');
 
-const serviceAccount = require('./src/digitalsignage-21521774-firebase-adminsdk-1c4hp-87cd1bef04.json');
+const serviceAccount = require('./src/YOUR FILE.json');
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
