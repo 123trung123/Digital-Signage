@@ -156,10 +156,9 @@ const AccountManagement = () => {
         uid: userCredential.user.uid,
         email: email,
         password: password,
-        type: 'ADMIN' // Adding the TYPE field with value 'ADMIN'
+        type: 'ADMIN' 
       });
 
-      // Make HTTP POST request to backend endpoint to grant admin privileges
       const response = await fetch('http://localhost:5000/grantAdmin', {
         method: 'POST',
         headers: {
@@ -178,7 +177,7 @@ const AccountManagement = () => {
       setEmail('');
       setPassword('');
       window.location.href = window.location.href;
-      fetchAccounts(); // Fetch accounts after creating a new one
+      fetchAccounts(); 
     } catch (error) {
       setError(error.message);
       console.error('Error creating account:', error);
@@ -190,7 +189,7 @@ const AccountManagement = () => {
       const accountsCollection = collection(firestore, 'accounts');
       const accountsSnapshot = await getDocs(accountsCollection);
       const accountsData = accountsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      const adminAccounts = accountsData.filter(account => account.type === 'ADMIN'); // Filter only ADMIN accounts
+      const adminAccounts = accountsData.filter(account => account.type === 'ADMIN'); 
       setAccounts(adminAccounts);
     } catch (error) {
       console.error('Error fetching accounts:', error);
@@ -213,21 +212,17 @@ const AccountManagement = () => {
       }
       const { email, password } = userDoc.data();
 
-      // Re-authenticate as this user (highly not recommended)
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const userToDelete = userCredential.user;
 
-      // Delete the user
       await deleteUser(userToDelete);
 
-      // Delete the account data from Firestore
       await deleteDoc(doc(firestore, 'accounts', accountId));
 
-      // Delete associated data in the Realtime Database
       await setDB(dbRef(database, `status/${accountUid}`), null);
       window.location.href = window.location.href;
       await updateCurrentUser(auth, originalUser);
-      fetchAccounts(); // Fetch accounts after deleting one
+      fetchAccounts(); 
     } catch (error) {
       console.error('Error deleting account:', error);
       setError('Error deleting account');
