@@ -1,0 +1,133 @@
+
+.image-gallery {
+  margin-bottom: 20px;
+}
+
+.image-gallery h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.image-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+.gallery{
+  padding: 20px;
+  background-color: #fafafa; 
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.gallery .image-item {
+  width: 100%; /* Set the width of the container to 100% */
+  max-width: 250px; /* Set the maximum width of the container to 250px */
+  position: relative;
+  opacity: 1;
+  border-radius: 8px;
+}
+
+.gallery .image-item img {
+  width: 100%; /* Set the width of the images to 100% of their container */
+  height: auto; /* Maintain aspect ratio */
+  display: block;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+
+.image-item:hover img {
+  transform: scale(1.05);
+}
+
+.upload-container {
+  margin-bottom: 20px;
+}
+
+.upload-container h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.upload-field {
+  margin-bottom: 10px;
+}
+
+.upload-field input[type="file"] {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4c90af;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.upload-field img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.activation-toggle {
+  margin-bottom: 10px;
+}
+
+
+.upload-container {
+  background-color: #fafafa;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align items to the left */
+}
+
+.upload-container h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.upload-field {
+  width: 25%; /* Set width to 25% of the container */
+}
+
+.upload-field input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #4c90af;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-sizing: border-box; /* Ensure padding doesn't affect size */
+}
+
+.upload-field img {
+  max-width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.activation-toggle {
+  margin-top: 10px;
+}
+
+.upload-button {
+  width: 25%; /* Set width to 25% of the container */
+  padding: 10px;
+  background-color: #4c90af;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-sizing: border-box; /* Ensure padding doesn't affect size */
+}
+
+.upload-button:hover {
+  background-color: #4569a0;
+}

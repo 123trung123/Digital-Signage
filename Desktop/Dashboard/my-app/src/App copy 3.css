@@ -52,7 +52,7 @@ body {
 .content {
   flex: 1;
   padding: 20px;
-  background-color: #ffffff; /* Very light gray background */
+  background-color: #f5f5f5; /* Very light gray background */
 }
 
 /* Upload screen styles */
@@ -78,7 +78,7 @@ body {
 }
 /* Logs screen styles */
 .logs-container {
-  background-color: #fafafa; /* Light gray background */
+  background-color: #ebebeb; /* Light gray background */
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -106,7 +106,7 @@ body {
 
 /* Signin screen styles */
 .signin-container {
-  background-color: #fafafa;
+  background-color: #fff;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -159,17 +159,18 @@ body {
   .content {
     flex: 1;
     padding: 20px;
-    background-color: #f8f9fa;
-    border-left: 1px solid #ddd; 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-    border-radius: 10px; 
+    background-color: #f8f9fa; /* Light gray background */
+    border-left: 1px solid #ddd; /* Add a border for separation */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+    border-radius: 10px; /* Rounded corners for a modern look */
   }
 }
 
+/* Existing styles (with minor adjustments) */
 
 /* Content styles */
 .home-container {
-  background-color: #fafafa; 
+  background-color: #fafafa; /* Even lighter gray background */
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -253,84 +254,4 @@ h1 span {
 
 .errorMessage {
   color: red;
-}
-.dark-mode {
-  --background-color: #1e1e1e; /* Dark background color */
-  --text-color: #ffffff; /* White text color */
-}
-
-.dark-mode .app-container {
-  background-color: var(--background-color);
-}
-
-.dark-mode .nav {
-  background-color: #333333; /* Darker background color for navigation */
-  border-right: 1px solid #555; /* Darker border color */
-}
-
-.dark-mode .navButton {
-  background-color: #666; /* Darker background color for buttons */
-}
-
-.dark-mode .navButton:hover {
-  background-color: #555; /* Slightly darker color on hover */
-}
-
-.dark-mode .content {
-  background-color: var(--background-color);
-}
-
-.dark-mode .upload-container,
-.dark-mode .logs-container,
-.dark-mode .home-container,
-.dark-mode .signin-container,
-.dark-mode .log-chart,
-.dark-mode .top-bar-title,
-.dark-mode .gallery,
-.dark-mode .container {
-  background-color: #2e2e2e; 
-  color: var(--text-color); 
-}
-
-.navToggleButton{
-  margin-bottom: 10px;
-  padding: 10px 20px;
-  position: relative;
-  border: none;
-  border-radius: 5px;
-  background-color: #555;
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-  display: block;
-  bottom: 0;
-  left: 0;
-} 
-.dark-mode .navToggleButton {
-  background-color: #2196F3;/* Button background color in dark mode */
-}
-.dark-mode .button:hover {
-  background-color: #0062CC; 
-}
-
-.dark-mode .errorMessage {
-  color: #ff9999; 
-}
-
-.toggle-dark-mode {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-}
-.nav.fixed-top {
-  position: fixed;
-  top: 0;
-  left: 0;
-  top: 0;
-  z-index: 1000; 
-}
-
-.content {
-  padding-top: 50px;
 }

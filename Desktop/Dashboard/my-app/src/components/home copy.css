@@ -1,0 +1,102 @@
+.home-container {
+  padding: 20px;
+}
+
+.select-machine {
+  margin-bottom: 20px;
+}
+
+.select-machine label {
+  margin-right: 10px;
+}
+
+.select-machine select {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.machine-box {
+  margin-bottom: 20px;
+}
+
+.machine-box h2 {
+  margin-bottom: 10px;
+}
+
+.images {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.image-item {
+  margin-right: 20px;
+  margin-bottom: 20px;
+  opacity: 0.5; /* Initially hide the image */
+  transition: opacity 0.5s ease; /* Apply transition for opacity */
+}
+
+.home-container .image-item img {
+  max-height: 150px;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+/* Add animation when image becomes visible */
+.image-item.fade-in {
+  opacity: 1;
+}
+
+.machine-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Align items horizontally with space between */
+}
+
+.machine-header h3 {
+  display: inline-flex;
+  width: 33%;
+  margin: 10; /* Remove margin */
+}
+
+.machine-header p {
+  margin: 10; /* Remove margin */
+  display: flex;
+  flex: 1;
+}
+
+.machine-box {
+  margin-bottom: 20px;
+}
+.image-item {
+  margin: 5px;
+  overflow: hidden; /* Important for animation containment */
+}
+
+.image-item img {
+  opacity: 1;
+  /* Remove default border for consistency */
+  border: 1px;
+}
+
+.image-item:hover {
+  /* Animate inner shadow movement */
+  animation: innerShine 0.5s ease-in-out infinite alternate;
+}
+
+.image-item.selected {
+  border: 2px solid blue; /* Example border style for selected images */
+}
+/* Inner shadow animation definition */
+@keyframes innerShine {
+  0% {
+    box-shadow: inset 0 0 5px rgba(0, 0, 255, 0.5); /* Blue inner shadow */
+  }
+  50% {
+    box-shadow: inset 5px 0 5px rgba(0, 0, 255, 0.8); /* Blue inner shadow, stronger */
+  }
+  100% {
+    box-shadow: inset 0 0 5px rgba(0, 0, 255, 0.5); /* Blue inner shadow */
+  }
+}

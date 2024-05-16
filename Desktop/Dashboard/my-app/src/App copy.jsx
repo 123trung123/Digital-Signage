@@ -5,12 +5,9 @@ import Home from './components/Home';
 import Logs from './components/Logs';
 import Upload from './components/Upload';
 import AccountManagement from './AccountManagement';
-import PlayerManagement from './PlayerManagement';
-import PlayerHome from './components/PlayerHome';
-import AdminHome from './components/AdminHome';
 import { storage } from './firebaseConfig';
 import { initializeApp } from 'firebase/app';
-import { get ,getDatabase, ref as dbRef, onValue, onDisconnect, set as setDB } from 'firebase/database';
+import { getDatabase, ref as dbRef, onValue, onDisconnect, set as setDB } from 'firebase/database';
 import { getFirestore, collection, addDoc, onSnapshot } from 'firebase/firestore';
 import { ref as storageRef, uploadBytes, getDownloadURL, listAll } from 'firebase/storage';
 import { v4 } from 'uuid';
@@ -18,13 +15,11 @@ import { auth } from './firebaseConfig';
 import { onAuthStateChanged } from 'firebase/auth';
 import firebaseConfig from './firebaseConfig';
 
-
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const firestore = getFirestore(app);
 const setdatabase = dbRef(database, 'PIN');
 const pinsCollection = collection(firestore, 'pins');
-
 
 const App = () => {
   const [inputValue, setInputValue] = useState('');
@@ -35,12 +30,7 @@ const App = () => {
   const [isOnline, setIsOnline] = useState(true);
   const [otherMachineStatus, setOtherMachineStatus] = useState({});
   const [initialLoad, setInitialLoad] = useState(true); // New flag
-  const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // Function to toggle dark mode
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode); // Toggle the state
-  };
   // useEffect for fetching pins from Realtime Database
   useEffect(() => {
     const unsubscribeRealtimeDB = onValue(setdatabase, (snapshot) => {
@@ -114,7 +104,7 @@ const App = () => {
             // Add the document with imageUrl, userId, and isActive fields to Firestore
             addDoc(pinsCollection, { 
               imageUrl: url, 
-              userId: "Store",
+              userId: user.uid,
               isActive: true ,// Set the initial activation status to true
               Id:imageId
             })
@@ -244,58 +234,38 @@ const App = () => {
 
   return (
     <BrowserRouter>
-    <div className={isDarkMode ? 'app-container dark-mode' : 'app-container'}>
-
+      <div className="app-container">
         <div className="nav">
-          <div className="nav fixed-top">
-            <div className="navButtons">
-              <div className="top-bar">
-                <span className="top-bar-title">Digital Signage System</span>
-              </div>
-              {!user && (
-                <>
-                  <Link to="/signin" className="navButton">Sign In</Link>
-                </>
-              )}
-              {user && (
-                <>
-                  {/* <Link to="/" className="navButton">Home</Link> */}
-                  <Link to="/logs" className="navButton">Dashboard</Link>
-                  <Link to="/upload" className="navButton">Access</Link>
-                  <Link to="/player" className="navButton">Player</Link>
-                  <Link to="/account-management" className="navButton">AdminManager</Link>
-                  
-                </>
-              )}
+          <div className="navButtons">
+            <div className="top-bar">
+              <span className="top-bar-title">Digital Signage System</span>
             </div>
-            <Link onClick={toggleDarkMode} className="navToggleButton">Toggle Dark Mode</Link>
+            {!user && (
+              <>
+                <Link to="/signin" className="navButton">Sign In</Link>
+              </>
+            )}
+            {user && (
+              <>
+                <Link to="/" className="navButton">Home</Link>
+                <Link to="/logs" className="navButton">Logs</Link>
+                <Link to="/upload" className="navButton">Upload</Link>
+                <Link to="/account-management" className="navButton">Account</Link>
+              </>
+            )}
           </div>
         </div>
         <div className="content">
           <Routes>
-            
             <Route path="/signin" element={<Signin setUser={setUser} />} />
-            {/* <Route path="/" element={<Home user={user} isOnline={isOnline} otherMachineStatus={otherMachineStatus} pins={pins} imageUrls={imageUrls} />} /> */}
-            <Route path="/logs" element={<Logs pins={pins} imageUrls={imageUrls} imageUpload={imageUpload} otherMachineStatus={otherMachineStatus} setImageUpload={setImageUpload} uploadFile={uploadFile} />} />
+            <Route path="/" element={<Home user={user} isOnline={isOnline} otherMachineStatus={otherMachineStatus} pins={pins} imageUrls={imageUrls} />} />
+            <Route path="/logs" element={<Logs pins={pins} imageUrls={imageUrls} otherMachineStatus={otherMachineStatus} />} />
             <Route path="/upload" element={<Upload pins={pins} imageUrls={imageUrls} imageUpload={imageUpload} otherMachineStatus={otherMachineStatus} setImageUpload={setImageUpload} uploadFile={uploadFile} uuid={v4()} />} />
-            <Route path="/account-management/*" element={
-              <>
-                <AdminHome user={user} isOnline={isOnline} otherMachineStatus={otherMachineStatus} pins={pins} imageUrls={imageUrls} />
-                <AccountManagement />
-              </>
-            } />
-            <Route path="/player/*" element={
-              <>
-                <PlayerHome user={user} isOnline={isOnline} otherMachineStatus={otherMachineStatus} pins={pins} imageUrls={imageUrls} />
-                <PlayerManagement />
-              </>
-            } />
+            <Route path="/account-management" element={<AccountManagement />} />
           </Routes> 
         </div>
       </div>
-
     </BrowserRouter>
-    
   );
 };
 

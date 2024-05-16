@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { collection, query, onSnapshot, getFirestore, doc, updateDoc, where } from 'firebase/firestore';
+import { collection, query, onSnapshot, getFirestore, doc, updateDoc } from 'firebase/firestore';
 import { storage } from '../firebaseConfig';
 import './home.css';
 
@@ -11,8 +11,6 @@ const Home = ({ isOnline, otherMachineStatus }) => {
   const [machineIds, setMachineIds] = useState([]);
   const [machineImages, setMachineImages] = useState({});
   const [openMachineId, setOpenMachineId] = useState(null);
-  const [players, setPlayers] = useState([]); // State to store players
-
   const toggleMachineBox = (machineId) => {
     setOpenMachineId(openMachineId === machineId ? null : machineId);
   };
@@ -29,11 +27,11 @@ const Home = ({ isOnline, otherMachineStatus }) => {
     // Fetch all machine IDs (UIDs)
     const fetchMachineIds = async () => {
       try {
-        const accountsRef = collection(firestore, 'accounts');
-        const q = query(accountsRef, where('type', '==', 'PLAYER'));
+        const pinsRef = collection(firestore, 'pins');
+        const q = query(pinsRef);
         const unsubscribe = onSnapshot(q, querySnapshot => {
           const uniqueMachineIds = new Set();
-          querySnapshot.forEach(doc => uniqueMachineIds.add(doc.data().uid));
+          querySnapshot.forEach(doc => uniqueMachineIds.add(doc.data().userId));
           setMachineIds(Array.from(uniqueMachineIds));
         });
         return unsubscribe;
@@ -106,11 +104,14 @@ const Home = ({ isOnline, otherMachineStatus }) => {
     }
   };
 
+  // Filter out admin accounts
+  const nonAdminMachineIds = Object.keys(otherMachineStatus).filter(machineId => !otherMachineStatus[machineId]?.admin);
+
   return (
     <div className="home-container">
       <h2>Machine List</h2>
       <ul>
-        {machineIds.map(machineId => (
+        {nonAdminMachineIds.map(machineId => (
           <li key={machineId}>
             Machine {machineId}: <span className="status-indicator" style={{ backgroundColor: otherMachineStatus[machineId]?.state === 'online' ? 'green' : 'red' }} /> {otherMachineStatus[machineId]?.state}
           </li>
@@ -157,7 +158,7 @@ const Home = ({ isOnline, otherMachineStatus }) => {
           <div className="confirmation-dropdown">
             <select onChange={(e) => confirmUIDChange(e.target.value)}>
               <option value="">Select Machine ID</option>
-              {machineIds.map(machineId => (
+              {nonAdminMachineIds.map(machineId => (
                 <option key={machineId} value={machineId}>{machineId}</option>
               ))}
             </select>

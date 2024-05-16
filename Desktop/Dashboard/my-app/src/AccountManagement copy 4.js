@@ -150,7 +150,7 @@ const AccountManagement = () => {
     try {
       const originalUser = auth.currentUser;
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-  
+
       await updateCurrentUser(auth, originalUser);
       await addDoc(collection(firestore, 'accounts'), {
         uid: userCredential.user.uid,
@@ -158,22 +158,7 @@ const AccountManagement = () => {
         password: password,
         type: 'ADMIN' // Adding the TYPE field with value 'PLAYER'
       });
-  
-      // Make HTTP POST request to backend endpoint to grant admin privileges
-      const response = await fetch('/grantAdmin', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ uid: userCredential.user.uid }),
-      });
-  
-      if (response.ok) {
-        console.log('Admin privileges granted successfully');
-      } else {
-        console.error('Error granting admin privileges:', response.statusText);
-      }
-  
+
       alert('Account created successfully!');
       setEmail('');
       setPassword('');
@@ -184,15 +169,13 @@ const AccountManagement = () => {
       console.error('Error creating account:', error);
     }
   };
-  
 
   const fetchAccounts = async () => {
     try {
       const accountsCollection = collection(firestore, 'accounts');
       const accountsSnapshot = await getDocs(accountsCollection);
       const accountsData = accountsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      const adminAccounts = accountsData.filter(account => account.type === 'ADMIN'); // Filter only ADMIN accounts
-      setAccounts(adminAccounts);
+      setAccounts(accountsData);
     } catch (error) {
       console.error('Error fetching accounts:', error);
       setError('Error fetching accounts');

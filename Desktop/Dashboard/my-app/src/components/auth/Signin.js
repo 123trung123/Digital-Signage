@@ -65,30 +65,53 @@ const Signin = () => {
   //   }
   // };
   // VERSION 3 add evoke account
+  // const signIn = async (e) => {
+  //   e.preventDefault();
+  //   signInWithEmailAndPassword(auth, email, password)
+  //     .then(async () => {
+  //       const user = auth.currentUser;
+  //       if (user) {
+  //         const idTokenResult = await user.getIdTokenResult();
+  //         if (idTokenResult.claims.admin) {
+  //           // User is an admin, allow login
+  //           setTimeout(() => {
+  //             navigate('/');
+  //           }, 500); // Delay for 500 milliseconds (adjust as needed)
+  //         } else {
+  //           // User is not an admin, show error message
+  //           setError("Only admin users can log in.");
+  //         }
+  //       } else {
+  //         setError("User not found.");
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       setError(error.message);
+  //     });
+  // };
   const signIn = async (e) => {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
-      .then(async () => {
-        const user = auth.currentUser;
-        if (user) {
-          const idTokenResult = await user.getIdTokenResult();
-          if (idTokenResult.claims.admin) {
-            // User is an admin, allow login
-            setTimeout(() => {
-              navigate('/');
-            }, 500); // Delay for 500 milliseconds (adjust as needed)
-          } else {
-            // User is not an admin, show error message
-            setError("Only admin users can log in.");
-          }
+    try {
+      const { user } = await signInWithEmailAndPassword(auth, email, password);
+      if (user) {
+        const idTokenResult = await user.getIdTokenResult();
+        if (idTokenResult.claims.admin) {
+          // User is an admin, allow login
+          navigate('/');
         } else {
-          setError("User not found.");
+          // User is not an admin, show error message
+          setError("Only admin users can log in.");
+          // You might also want to sign out the user in this case
+          await auth.signOut();
         }
-      })
-      .catch((error) => {
-        setError(error.message);
-      });
+      } else {
+        setError("User not found.");
+      }
+    } catch (error) {
+      setError(error.message);
+    }
   };
+  
   // version4 add smooth
   
   return (

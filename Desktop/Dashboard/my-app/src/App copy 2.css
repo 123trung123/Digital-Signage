@@ -1,3 +1,4 @@
+Global Styles
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -7,13 +8,12 @@ body {
 .app-container {
   display: flex;
   min-height: 100vh;
-  transition: all 0.5s ease-in-out; 
 }
 
 /* Navigation Styles */
 .nav {
   width: 15%;
-  background-color: #b4b0b0; 
+  background-color: #333;
   border-right: 1px solid #ddd;
   padding: 20px;
 }
@@ -27,7 +27,7 @@ body {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  background-color: #2196F3; /* Blue background for buttons */
+  background-color: #007bff;
   color: #fff;
   text-decoration: none;
   font-weight: bold;
@@ -35,7 +35,7 @@ body {
 }
 
 .navButton:hover {
-  background-color: #1976D2; /* Darker blue on hover */
+  background-color: #0056b3;
 }
 
 .top-bar {
@@ -45,14 +45,14 @@ body {
 .top-bar-title {
   font-size: 24px;
   font-weight: bold;
-  color: #000000; /* Darker color for title */
+  color: #fff;
 }
 
 /* Content Styles */
 .content {
   flex: 1;
   padding: 20px;
-  background-color: #ffffff; /* Very light gray background */
+  background-color: #f5f5f5;
 }
 
 /* Upload screen styles */
@@ -64,7 +64,7 @@ body {
 }
 
 .upload-button {
-  background-color: #4CAF50; /* Green background for button */
+  background-color: #0056b3; /* Changed to a darker shade */
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -74,11 +74,12 @@ body {
 }
 
 .upload-button:hover {
-  background-color: #388E3C; /* Darker green on hover */
+  background-color: #004080; /* Darker shade on hover */
 }
+
 /* Logs screen styles */
 .logs-container {
-  background-color: #fafafa; /* Light gray background */
+  background-color: #fff;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -86,7 +87,7 @@ body {
 
 /* Home screen styles */
 .home-container {
-  background-color: #fafafa; /* Even lighter gray background */
+  background-color: #fff;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -106,13 +107,13 @@ body {
 
 /* Signin screen styles */
 .signin-container {
-  background-color: #fafafa;
+  background-color: #fff;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 450px;
+  width: 300px;
   margin: auto; /* Center the container horizontally */
-  margin-top: 250px; /* Add some top margin for spacing */
+  margin-top: 50px; /* Add some top margin for spacing */
   text-align: center; /* Align the content center */
 }
 
@@ -125,7 +126,7 @@ body {
 .signin-container input {
   width: calc(100% - 20px); /* Adjust the width to fit within the container with padding */
   padding: 10px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
 }
@@ -133,7 +134,7 @@ body {
 .signin-container button {
   width: calc(100% - 20px); /* Adjust the width to fit within the container with padding */
   padding: 10px;
-  background-color: #2979FF; /* Blue background for button (darker blue) */
+  background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -141,7 +142,7 @@ body {
 }
 
 .signin-container button:hover {
-  background-color: #0062CC; /* Darker blue on hover */
+  background-color: #0056b3;
 }
 
 /* Responsive Styles */
@@ -159,17 +160,18 @@ body {
   .content {
     flex: 1;
     padding: 20px;
-    background-color: #f8f9fa;
-    border-left: 1px solid #ddd; 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-    border-radius: 10px; 
+    background-color: #f8f9fa; /* Light grey background */
+    border-left: 1px solid #ddd; /* Add a border for separation */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+    border-radius: 10px; /* Rounded corners for a modern look */
   }
 }
 
+/* Existing styles */
 
 /* Content styles */
 .home-container {
-  background-color: #fafafa; 
+  background-color: #fff;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -180,6 +182,9 @@ body {
   align-items: center;
 }
 
+
+
+/* Additional styles for the new status indicators */
 .other-machine-status {
   margin-top: 20px;
 }
@@ -200,20 +205,19 @@ body {
   border-radius: 50%;
   margin-right: 5px;
 }
-
 h2 {
-  width: 100%;
-  text-align: bottom;
-  border-bottom: 1px solid #ccc; /* Lighter border color */
+  width: 100%; 
+  text-align: bottom
+; 
+  border-bottom: 1px solid #000; 
   line-height: 2.1em;
-  margin: 10px 0 20px;
-}
+  margin: 10px 0 20px; 
+} 
 
-h1 span {
-  background: #fff;
-  padding: 0 10px;
+h1 span { 
+   background:#fff; 
+   padding:0 10px; 
 }
-
 .title-container {
   position: relative;
 }
@@ -224,9 +228,8 @@ h1 span {
   left: 0;
   width: 100%;
   height: 1px;
-  background-color: #ccc; /* Lighter separator color */
+  background-color: #000; /* Change this to your desired color */
 }
-
 .container {
   background-color: #fff;
   padding: 20px;
@@ -244,7 +247,7 @@ h1 span {
 .button {
   width: 100%;
   padding: 10px;
-  background-color: #2196F3; /* Blue background for button */
+  background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -253,84 +256,4 @@ h1 span {
 
 .errorMessage {
   color: red;
-}
-.dark-mode {
-  --background-color: #1e1e1e; /* Dark background color */
-  --text-color: #ffffff; /* White text color */
-}
-
-.dark-mode .app-container {
-  background-color: var(--background-color);
-}
-
-.dark-mode .nav {
-  background-color: #333333; /* Darker background color for navigation */
-  border-right: 1px solid #555; /* Darker border color */
-}
-
-.dark-mode .navButton {
-  background-color: #666; /* Darker background color for buttons */
-}
-
-.dark-mode .navButton:hover {
-  background-color: #555; /* Slightly darker color on hover */
-}
-
-.dark-mode .content {
-  background-color: var(--background-color);
-}
-
-.dark-mode .upload-container,
-.dark-mode .logs-container,
-.dark-mode .home-container,
-.dark-mode .signin-container,
-.dark-mode .log-chart,
-.dark-mode .top-bar-title,
-.dark-mode .gallery,
-.dark-mode .container {
-  background-color: #2e2e2e; 
-  color: var(--text-color); 
-}
-
-.navToggleButton{
-  margin-bottom: 10px;
-  padding: 10px 20px;
-  position: relative;
-  border: none;
-  border-radius: 5px;
-  background-color: #555;
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-  display: block;
-  bottom: 0;
-  left: 0;
-} 
-.dark-mode .navToggleButton {
-  background-color: #2196F3;/* Button background color in dark mode */
-}
-.dark-mode .button:hover {
-  background-color: #0062CC; 
-}
-
-.dark-mode .errorMessage {
-  color: #ff9999; 
-}
-
-.toggle-dark-mode {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-}
-.nav.fixed-top {
-  position: fixed;
-  top: 0;
-  left: 0;
-  top: 0;
-  z-index: 1000; 
-}
-
-.content {
-  padding-top: 50px;
 }
