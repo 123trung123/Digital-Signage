@@ -1,6 +1,6 @@
 const express = require('express');
 const admin = require('firebase-admin');
-const cors = require('cors');
+const cors = require('cors');  // Import the cors package
 const serviceAccount = require('./src/digitalsignage-21521774-firebase-adminsdk-1c4hp-2b39253bff.json');
 
 admin.initializeApp({
@@ -8,7 +8,7 @@ admin.initializeApp({
 });
 
 const app = express();
-app.use(cors());
+app.use(cors());  // Use the cors middleware
 app.use(express.json());
 
 app.post('/grantAdmin', async (req, res) => {
