@@ -8,9 +8,11 @@ admin.initializeApp({
 });
 
 const app = express();
-app.use(cors());  // Use the cors middleware
+app.use(cors());
 app.use(express.json());
-
+app.use("/" , ( req, res) => {
+  res.send("server is running");
+});
 app.post('/grantAdmin', async (req, res) => {
   const { uid } = req.body;
   try {
