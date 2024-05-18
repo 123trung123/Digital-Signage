@@ -1,17 +1,15 @@
 {
-  "name": "backend",
+  "name": "your-project-name",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "index.js",
+  "license": "MIT",
   "scripts": {
-    "start": "nodemon server.js"
+    "dev": "vercel dev",
+    "start": "vercel dev"
   },
   "dependencies": {
-    "express": "^4.19.2",
-    "firebase-admin": "^12.0.0",
-    "cors": "^2.8.5",
-    "nodemon": "^2.0.22"
-  },
-  "engines": {
-    "node": "20.x"
+    "firebase-admin": "^9.0.0",
+    "micro": "^9.3.4",
+    "micro-cors": "^0.1.1"
   }
 }
