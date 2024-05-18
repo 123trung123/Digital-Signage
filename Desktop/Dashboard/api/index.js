@@ -1,30 +1,38 @@
 const express = require('express');
+const cors = require('cors');
 const admin = require('firebase-admin');
-const cors = require('cors');  // Import the cors package
-const serviceAccount = require('./digitalsignage-21521774-firebase-adminsdk-1c4hp-2b39253bff.json');
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
 
 const app = express();
+const port = process.env.PORT || 3000;
+
+// Initialize Firebase Admin SDK
+const serviceAccount = require('./digitalsignage-21521774-firebase-adminsdk-1c4hp-2b39253bff.json');
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
+
 app.use(cors());
 app.use(express.json());
-app.use("/" , ( req, res) => {
-  res.send("server is running");
+
+app.get('/', (req, res) => {
+  res.send('Hello World!');
 });
-app.post('/grantAdmin', async (req, res) => {
-  const { uid } = req.body;
+
+app.get('/your-endpoint', async (req, res) => {
   try {
-    await admin.auth().setCustomUserClaims(uid, { admin: true });
-    res.status(200).send({ message: 'Admin privileges granted successfully' });
+    // Example Firebase call
+    const db = admin.firestore();
+    const doc = await db.collection('your-collection').doc('your-doc').get();
+    if (!doc.exists) {
+      return res.status(404).send('Document not found');
+    }
+    res.status(200).send(doc.data());
   } catch (error) {
-    console.error('Error setting custom claims:', error);
-    res.status(500).send({ error: 'Error granting admin privileges' });
+    console.error('Function invocation failed:', error);
+    res.status(500).send('Internal Server Error');
   }
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
