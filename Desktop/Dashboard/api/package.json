@@ -4,14 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\"&& exit 1",
-    "start": "nodemon index.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
   "dependencies": {
     "express": "4.19.2",
-    "nodemon":"^2.0.22",
     "cors": "^2.8.5",
     "firebase": "^10.11.0",
     "firebase-admin": "^12.0.0",
