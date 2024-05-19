@@ -179,7 +179,7 @@ const AccountManagement = () => {
       setLoading(true);
       setTimeout(() => {
         window.location.href = window.location.href; 
-      }, 5000);
+      }, 500);
       fetchAccounts(); 
     } catch (error) {
       setError(error.message);
