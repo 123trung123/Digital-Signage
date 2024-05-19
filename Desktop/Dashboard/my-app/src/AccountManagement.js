@@ -159,7 +159,7 @@ const AccountManagement = () => {
         type: 'ADMIN' 
       });
 
-      const response = await fetch('http://localhost:5000/grantAdmin', {
+      const response = await fetch('http://localhost:10000/grantAdmin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
