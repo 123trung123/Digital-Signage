@@ -3,9 +3,9 @@ const admin = require('firebase-admin');
 const cors = require('cors');
 // const serviceAccount = require('./digitalsignage-21521774-firebase-adminsdk-1c4hp-2b39253bff.json');
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount),
+// });
 
 const app = express();
 app.use(cors());
