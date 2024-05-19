@@ -2,7 +2,7 @@ const express = require('express');
 const admin = require('firebase-admin');
 const cors = require('cors');
 const path = require('path');
-require('dotenv').config(); // Load environment variables from .env file
+// require('dotenv').config(); // Load environment variables from .env file
 
 // Ensure all required environment variables are loaded
 if (!process.env.FIREBASE_PRIVATE_KEY) {
