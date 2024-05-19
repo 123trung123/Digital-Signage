@@ -1,124 +1,70 @@
-# Project Setup Guide
+# Getting Started with Create React App
 
-## Prerequisites
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-- Node.js
-- npm (Node Package Manager)
-- Firebase account
+## Available Scripts
 
-## Step-by-Step Instructions
+In the project directory, you can run:
 
-### 1. Clone the Repository
+### `npm start`
 
-First, clone the repository to your local machine:
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-git clone <repository-url>
-cd <repository-directory>
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
+### `npm test`
 
-### 2. Install Dependencies
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-Install all the dependencies listed in the `package.json` file:
+### `npm run build`
 
-npm install
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-### 3. Configure Firebase
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-#### a. Download `firebaseConfig`
+### `npm run eject`
 
-1. Go to your Firebase console.
-2. Navigate to **Project Settings**.
-3. Scroll down to the **Your Apps** section.
-4. Find the code snippet for `firebaseConfig` and copy it.
-5. Paste the `firebaseConfig` code into your project file where you initialize Firebase.
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-#### b. Configure Admin SDK
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-1. In the Firebase console, go to **Project Settings** > **Service Accounts**.
-2. Copy the code for the Admin SDK.
-3. Replace the existing Admin SDK code in your project with the copied code.
-4. Click on **Generate new private key** and download the key file.
-5. Place the downloaded key file in the same directory as your Admin SDK code.
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-### 4. Update Admin SDK Path
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-1. Open your Admin SDK file.
-2. Find the line:
+## Learn More
 
-var serviceAccount = require("path/to/serviceAccountKey.json");
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-3. Replace it with:
-var serviceAccount = require("YOUR_KEY_FILE.json");
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-### 5. Update `ROOT.js`
+### Code Splitting
 
-1. Open `ROOT.js`.
-2. Change the line:
-const serviceAccount = require('./src/YOUR_FILE.json');
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
+### Analyzing the Bundle Size
 
-Ensure you keep `./src` in the path.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### 6. Firebase Authentication
+### Making a Progressive Web App
 
-1. Go to the Firebase console and navigate to **Authentication**.
-2. Create an account using email and password.
-3. Copy the UID of the created account.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### 7. Update `ROOT.js` with UID
+### Advanced Configuration
 
-1. Open `ROOT.js`.
-2. Paste the UID you copied into the appropriate location in the code.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### 8. Run `ROOT.js`
+### Deployment
 
-Run `ROOT.js` using Node.js in the terminal:
-node ROOT.js
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
+### `npm run build` fails to minify
 
-### 9. Start the Server
-
-Start the server by running:
-node server.js
-
-
-## Project Dependencies
-
-This project uses several npm packages for various functionalities. Below is a list of the main dependencies along with their versions:
-
-### Dependencies
-
-- `@emotion/react`: ^11.11.4
-- `@emotion/styled`: ^11.11.5
-- `@mui/icons-material`: ^5.15.17
-- `@mui/lab`: ^5.0.0-alpha.170
-- `@mui/material`: ^5.15.17
-- `@mui/system`: ^5.15.15
-- `body-parser`: ^1.20.2
-- `chart.js`: ^4.4.2
-- `cors`: ^2.8.5
-- `express`: ^4.19.2
-- `firebase-admin`: ^12.0.0
-- `firebase`: ^10.11.0
-- `react-chartjs-2`: ^5.2.0
-- `react-dom`: ^18.2.0
-- `react-router-dom`: ^6.22.3
-- `react-scripts`: ^5.0.1
-- `react`: ^18.2.0
-
-### DevDependencies
-
-- `@testing-library/jest-dom`: ^5.17.0
-- `@testing-library/react`: ^13.4.0
-- `@testing-library/user-event`: ^13.5.0
-- `web-vitals`: ^2.1.4
-
-To install all dependencies, you can run:
-npm install @emotion/react@11.11.4 @emotion/styled@11.11.5 @mui/icons-material@5.15.17 @mui/lab@5.0.0-alpha.170 @mui/material@5.15.17 @mui/system@5.15.15 body-parser@1.20.2 chart.js@4.4.2 cors@2.8.5 express@4.19.2 firebase-admin@12.0.0 firebase@10.11.0 react-chartjs-2@5.2.0 react-dom@18.2.0 react-router-dom@6.22.3 react-scripts@5.0.1 react@18.2.0 @testing-library/jest-dom@5.17.0 @testing-library/react@13.4.0 @testing-library/user-event@13.5.0 web-vitals@2.1.4
-
-
-### 10. Run the App
-
-Finally, start the application by running:
-npm start
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
