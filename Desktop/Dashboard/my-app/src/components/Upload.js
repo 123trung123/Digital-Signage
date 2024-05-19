@@ -3,7 +3,7 @@ import { collection, onSnapshot, getFirestore, doc, deleteDoc } from 'firebase/f
 import { storage } from '../firebaseConfig';
 import { uploadBytes, getDownloadURL, ref, deleteObject } from 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
-import './GalleryWithUpload.css';
+import './Style/Access.css';
 const firestore = getFirestore();
 
 const Upload = ({ imageUpload, setImageUpload, uploadFile, uuid }) => {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { collection, query, onSnapshot, getFirestore, where } from 'firebase/firestore';
-import './home.css';
+import './Style/Home.css';
 
 const firestore = getFirestore();
 

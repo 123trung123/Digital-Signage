@@ -62,10 +62,22 @@ const App = () => {
   }, []);
   const [navOpen, setNavOpen] = useState(false);
   
+  // const toggleDarkMode = () => {
+  //   setIsDarkMode(!isDarkMode);
+  // };
   const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
+    const newDarkMode = !isDarkMode;
+    setIsDarkMode(newDarkMode);
+    localStorage.setItem('darkMode', newDarkMode ? 'enabled' : 'disabled');
   };
-
+  useEffect(() => {
+    const darkModePreference = localStorage.getItem('darkMode');
+    if (darkModePreference === 'enabled') {
+      setIsDarkMode(true);
+    } else {
+      setIsDarkMode(false);
+    }
+  }, []);
   const toggleNav = () => {
     setNavOpen(!navOpen);
   };
@@ -248,12 +260,14 @@ const App = () => {
   return (
     <BrowserRouter>
     <div className={isDarkMode ? 'app-container dark-mode' : 'app-container'}>
-    <div className={`nav ${navOpen ? 'open' : 'hidden'}`}>
+
+    
+       
         <div className="nav">
-          <div className="nav fixed-top">
             <div className="navButtons">
               <div className="top-bar">
                 <span className="top-bar-title">Digital Signage System</span>
+                
               </div>
               {!user && (
                 <>
@@ -273,8 +287,7 @@ const App = () => {
             </div>
             <Link onClick={toggleDarkMode} className="navToggleButton">Toggle Dark Mode</Link>
           </div>
-        </div>
-        </div>
+       
         <div className="content">
           <Routes>
             
