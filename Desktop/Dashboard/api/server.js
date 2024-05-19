@@ -2,14 +2,7 @@ const express = require('express');
 const admin = require('firebase-admin');
 const cors = require('cors');
 const path = require('path');
-// require('dotenv').config(); // Load environment variables from .env file
 
-// Ensure all required environment variables are loaded
-if (!process.env.FIREBASE_PRIVATE_KEY) {
-  throw new Error('Missing FIREBASE_PRIVATE_KEY environment variable');
-}
-
-// Create service account object from environment variables
 const serviceAccount = {
   type: process.env.FIREBASE_TYPE,
   project_id: process.env.FIREBASE_PROJECT_ID,
