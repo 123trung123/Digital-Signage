@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createUserWithEmailAndPassword, deleteUser, signInWithEmailAndPassword, updateCurrentUser } from 'firebase/auth';
-import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, getDoc } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, getDoc, query, where, updateDoc } from 'firebase/firestore';
 import { auth } from './firebaseConfig';
 import { ref as dbRef, set as setDB, getDatabase } from 'firebase/database';
 import './components/Style/Management.css';
@@ -80,8 +80,14 @@ const PlayerManagement = () => {
       if (!userDoc.exists()) {
         throw new Error("User does not exist.");
       }
+      const imagesCollection = collection(firestore, 'pins');
+      const imagesQuery = query(imagesCollection, where('userId', '==', accountUid));
+      const imagesSnapshot = await getDocs(imagesQuery);
+      imagesSnapshot.forEach(async (imageDoc) => {
+        console.log('Updating Image:', imageDoc.id);
+        await updateDoc(imageDoc.ref, { userId: 'Store' });
+      });
       const { email, password } = userDoc.data();
-
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const userToDelete = userCredential.user;
 
