@@ -4,7 +4,6 @@ import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, getDoc } fro
 import { auth } from './firebaseConfig';
 import { ref as dbRef, set as setDB, getDatabase } from 'firebase/database';
 import './components/Style/Management.css';
-
 const firestore = getFirestore();
 const database = getDatabase();
 
@@ -14,13 +13,13 @@ const PlayerManagement = () => {
   const [accounts, setAccounts] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
       const originalUser = auth.currentUser;
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
+      await updateCurrentUser(auth, originalUser);
       await addDoc(collection(firestore, 'accounts'), {
         uid: userCredential.user.uid,
         email: email,
@@ -32,14 +31,31 @@ const PlayerManagement = () => {
       setEmail('');
       setPassword('');
       setLoading(true); 
+      setTimeout(() => {
+        window.location.href = window.location.href; 
+      }, 500);
       fetchAccounts();
-      window.location.href = window.location.href; 
     } catch (error) {
       setError(error.message);
       console.error('Error creating account:', error);
     }
   };
 
+  // const fetchAccounts = async () => {
+  //   try {
+  //     const accountsCollection = collection(firestore, 'accounts');
+  //     const accountsSnapshot = await getDocs(accountsCollection);
+  //     const accountsData = accountsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  //     setAccounts(accountsData);
+  //   } catch (error) {
+  //     console.error('Error fetching accounts:', error);
+  //     setError('Error fetching accounts');
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchAccounts();
+  // }, []);
   const fetchAccounts = async () => {
     try {
       const accountsCollection = collection(firestore, 'accounts');
@@ -52,11 +68,9 @@ const PlayerManagement = () => {
       setError('Error fetching accounts');
     }
   };
-
-  useEffect(() => {
+    useEffect(() => {
     fetchAccounts();
   }, []);
-
   const handleDeleteAccount = async (accountId, accountUid) => {
     try {
       const originalUser = auth.currentUser;
@@ -72,12 +86,13 @@ const PlayerManagement = () => {
       const userToDelete = userCredential.user;
 
       await deleteUser(userToDelete);
-      await deleteDoc(doc(firestore, 'accounts', accountId));
-      await setDB(dbRef(database, `status/${accountUid}`), null);
 
+      await deleteDoc(doc(firestore, 'accounts', accountId));
+
+      await setDB(dbRef(database, `status/${accountUid}`), null);
+      window.location.href = window.location.href;
       await updateCurrentUser(auth, originalUser);
-      fetchAccounts();
-      window.location.href = window.location.href; 
+      fetchAccounts(); 
     } catch (error) {
       console.error('Error deleting account:', error);
       setError('Error deleting account');
@@ -114,7 +129,7 @@ const PlayerManagement = () => {
       <button onClick={fetchAccounts} className="button">Fetch Accounts</button>
       <ul>
         {accounts.map((account, index) => (
-          <li key={index} className="account-item">
+          <li key={index}className="account-item">
             <div>
               <p>Email: {account.email}</p>
               <p>Password: {account.password}</p>
