@@ -394,3 +394,12 @@ h1 span {
 .dark-mode .content::before {
   background: rgba(255, 255, 255, 0.1);
 }
+.Delete{
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #e74c3c;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}

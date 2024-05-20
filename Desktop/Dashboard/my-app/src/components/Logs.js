@@ -773,8 +773,8 @@ const Log = ({ otherMachineStatus }) => {
     datasets: [
       {
         data: [onlineDevices, totalAccounts - onlineDevices],
-        backgroundColor: ['#36A2EB', '#FF6384'],
-        hoverBackgroundColor: ['#36A2EB', '#FF6384'],
+        backgroundColor: ['#3498db', '#FF6384'],
+        hoverBackgroundColor: ['#3498db', '#FF6384'],
       },
     ],
   };
@@ -784,8 +784,8 @@ const Log = ({ otherMachineStatus }) => {
     datasets: [
       {
         data: [onlineAdmins, totalAdmins - onlineAdmins],
-        backgroundColor: ['#36A2EB', '#FF6384'],
-        hoverBackgroundColor: ['#36A2EB', '#FF6384'],
+        backgroundColor: ['#3498db', '#FF6384'],
+        hoverBackgroundColor: ['#3498db', '#FF6384'],
       },
     ],
   };
@@ -795,8 +795,8 @@ const Log = ({ otherMachineStatus }) => {
     datasets: [
       {
         data: [onlinePlayers, totalPlayers - onlinePlayers],
-        backgroundColor: ['#36A2EB', '#FF6384'],
-        hoverBackgroundColor: ['#36A2EB', '#FF6384'],
+        backgroundColor: ['#3498db', '#FF6384'],
+        hoverBackgroundColor: ['#3498db', '#FF6384'],
       },
     ],
   };
@@ -808,7 +808,7 @@ const Log = ({ otherMachineStatus }) => {
           <h2>All-Devices</h2>
           <Doughnut data={deviceData} />
           <div className="chart-info">
-            <p style={{ color: '#36A2EB' }}>Online Devices: {onlineDevices} ({onlinePercentage.toFixed(1)}%)</p>
+            <p style={{ color: '#3498db' }}>Online Devices: {onlineDevices} ({onlinePercentage.toFixed(1)}%)</p>
             <p style={{ color: '#FF6384' }}>Total Devices: {totalAccounts}</p>
           </div>
         </div>
@@ -816,7 +816,7 @@ const Log = ({ otherMachineStatus }) => {
           <h2>Admins</h2>
           <Doughnut data={adminData} />
           <div className="chart-info">
-            <p style={{ color: '#36A2EB' }}>Admins Online: {onlineAdmins} ({((onlineAdmins / totalAdmins) * 100).toFixed(1)}%)</p>
+            <p style={{ color: '#3498db' }}>Admins Online: {onlineAdmins} ({((onlineAdmins / totalAdmins) * 100).toFixed(1)}%)</p>
             <p style={{ color: '#FF6384' }}>Total Admins: {totalAdmins}</p>
           </div>
         </div>
@@ -824,7 +824,7 @@ const Log = ({ otherMachineStatus }) => {
           <h2>Players</h2>
           <Doughnut data={playerData} />
           <div className="chart-info">
-            <p style={{ color: '#36A2EB' }}>Players Online: {onlinePlayers} ({((onlinePlayers / totalPlayers) * 100).toFixed(1)}%)</p>
+            <p style={{ color: '#3498db' }}>Players Online: {onlinePlayers} ({((onlinePlayers / totalPlayers) * 100).toFixed(1)}%)</p>
             <p style={{ color: '#FF6384' }}>Total Players: {totalPlayers}</p>
           </div>
         </div>

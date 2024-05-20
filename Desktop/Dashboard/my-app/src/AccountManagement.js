@@ -145,6 +145,22 @@ const AccountManagement = () => {
   const [accounts, setAccounts] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [currentUid, setCurrentUid] = useState(null); 
+
+  useEffect(() => {
+    const fetchCurrentUserUid = async () => {
+      try {
+        const user = auth.currentUser;
+        if (user) {
+          setCurrentUid(user.uid);
+        }
+      } catch (error) {
+        console.error('Error fetching current user UID:', error);
+      }
+    };
+
+    fetchCurrentUserUid();
+  }, []);
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
@@ -262,16 +278,24 @@ const AccountManagement = () => {
       <button onClick={fetchAccounts} className="button">Fetch Accounts</button>
       <ul>
         {accounts.map((account, index) => (
-          <li key={index}className="account-item">
+          // <li key={index}className="account-item">
+          //   <div>
+          //     <p>Email: {account.email}</p>
+          //     <p>Password: {account.password}</p>
+          //     <p>UID: {account.uid}</p>
+          //     <p>Type: {account.type}</p> 
+          //   </div>
+          //   <button className="delete-button" onClick={() => handleDeleteAccount(account.id, account.uid)}>Delete</button>
+          // </li>
+            <li key={index} className="account-item" style={{  border: account.uid === currentUid ? '2px solid #ff9800' : 'none' }}>
             <div>
               <p>Email: {account.email}</p>
               <p>Password: {account.password}</p>
               <p>UID: {account.uid}</p>
-              <p>Type: {account.type}</p> {/* Display the account type */}
+              <p>Type: {account.type}</p>
             </div>
             <button className="delete-button" onClick={() => handleDeleteAccount(account.id, account.uid)}>Delete</button>
           </li>
-        
         ))}
       </ul>
     </div>

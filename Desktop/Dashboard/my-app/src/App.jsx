@@ -16,6 +16,7 @@ import { v4 } from 'uuid';
 import { auth } from './firebaseConfig';
 import { onAuthStateChanged } from 'firebase/auth';
 import firebaseConfig from './firebaseConfig';
+import { signOut } from 'firebase/auth';
 
 
 const app = initializeApp(firebaseConfig);
@@ -35,7 +36,15 @@ const App = () => {
   const [otherMachineStatus, setOtherMachineStatus] = useState({});
   const [initialLoad, setInitialLoad] = useState(true); // New flag
   const [isDarkMode, setIsDarkMode] = useState(false);
-
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        setUser(null);
+      })
+      .catch((error) => {
+        console.error('Error signing out: ', error);
+      });
+  };
   // useEffect for fetching pins from Realtime Database
   useEffect(() => {
     const unsubscribeRealtimeDB = onValue(setdatabase, (snapshot) => {
@@ -286,6 +295,7 @@ const App = () => {
               )}
             </div>
             <Link onClick={toggleDarkMode} className="navToggleButton">Toggle Dark Mode</Link>
+            <button onClick={handleLogout} className="Delete">Logout</button>
           </div>
        
         <div className="content">

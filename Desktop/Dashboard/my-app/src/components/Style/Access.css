@@ -1,34 +1,32 @@
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
 }
 
 .gallery {
   padding: 20px;
-  background-color: #fafafa;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.gallery h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
 .image-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 10px;
+  gap: 20px;
 }
 
-.gallery .image-item {
-  max-width: 250px;
+.image-item {
   position: relative;
   border-radius: 8px;
   overflow: hidden;
-  opacity: 1;
+  transition: transform 0.3s ease;
 }
-.gallery .image-item img {
+
+.image-item img {
   width: 100%;
   height: auto;
   display: block;
@@ -36,17 +34,21 @@ body {
   transition: transform 0.3s ease;
 }
 
+.image-item:hover {
+  transform: scale(1.02);
+}
+
 .image-item:hover img {
   transform: scale(1.05);
 }
 
-.gallery  .image-item button {
+.image-item button {
   position: absolute;
   top: 10px;
   right: 10px;
   padding: 5px 10px;
   background-color: #e74c3c;
-  color: #fff;
+  color: #ffffff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -57,33 +59,24 @@ body {
   background-color: #c0392b;
 }
 
-/* Upload Container Styles */
 .upload-container {
-  background-color: #fafafa;
+  background-color: #ffffff;
   padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.upload-container h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
 }
 
 .upload-field {
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .upload-field input[type="file"] {
   width: 100%;
   padding: 10px;
-  background-color: #4c90af;
-  color: white;
+  background-color: #3498db;
+  color: #ffffff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -100,100 +93,23 @@ body {
 }
 
 .activation-toggle {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
 }
 
-.activation-toggle label {
-  margin-right: 10px;
-}
 
 .upload-button {
   width: 100%;
-  padding: 10px;
-  background-color: #4c90af;
-  color: white;
+  padding: 12px;
+  background-color: #3498db;
+  color: #ffffff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  box-sizing: border-box;
-}
-
-.upload-button:hover {
-  background-color: #4569a0;
-}
-.gallery {
-  margin-bottom: 5px;
-}
-
-.image-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.image-item {
-  position: relative;
-}
-
-.image-item img {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 5px;
-}
-
-.image-item button {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  background-color: #e74c3c;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 5px 10px;
-  cursor: pointer;
-}
-
-.image-item button:hover {
-  background-color: #c0392b;
-}
-
-.upload-container {
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.upload-field input[type="file"] {
-  display: block;
-  margin-bottom: 10px;
-  background: #3498db;
-}
-
-.upload-field img {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 5px;
-}
-
-.activation-toggle {
-  margin-top: 10px;
-}
-
-.upload-button {
-  background-color: #3498db;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s ease, transform 0.3s ease;
+  box-sizing: border-box;
 }
 
 .upload-button:hover {
@@ -206,7 +122,7 @@ body {
   transform: translateY(0);
 }
 
-/* Responsive Styles
+/* Responsive Styles */
 @media (max-width: 768px) {
   .app-container {
     flex-direction: column;
@@ -232,4 +148,4 @@ body {
   .upload-button {
     width: 100%;
   }
-} */
+}

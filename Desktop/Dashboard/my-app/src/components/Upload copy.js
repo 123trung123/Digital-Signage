@@ -3,13 +3,13 @@ import { collection, onSnapshot, getFirestore, doc, deleteDoc } from 'firebase/f
 import { storage } from '../firebaseConfig';
 import { uploadBytes, getDownloadURL, ref, deleteObject } from 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
-import './Style/Access.css';
+import './GalleryWithUpload.css';
 const firestore = getFirestore();
 
 const Upload = ({ imageUpload, setImageUpload, uploadFile, uuid }) => {
   const [previewUrl, setPreviewUrl] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
-  const [isActive, setIsActive] = useState(true); 
+  const [isActive, setIsActive] = useState(true); // New state for activation status
   const [imageUrls, setImageUrls] = useState([]);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const Upload = ({ imageUpload, setImageUpload, uploadFile, uuid }) => {
     try {
       await uploadFile();
       setPreviewUrl(null);
-      setIsActive(true);
+      setIsActive(true); // Reset activation status after successful upload
     } catch (error) {
       console.error('Error uploading file:', error);
     } finally {
@@ -48,26 +48,34 @@ const Upload = ({ imageUpload, setImageUpload, uploadFile, uuid }) => {
   };
 
   const toggleActivation = () => {
-    setIsActive(!isActive); 
+    setIsActive(!isActive); // Toggle activation status
   };
 
   const handleDelete = async (imageUrl, imageId, uuid) => {
     try {
+      // Delete document from Firestore
       await deleteDoc(doc(firestore, 'pins', imageId));
   
+      // Extract file name from image URL
       // const fileName = imageUrl.split('/').pop().split('?')[0];
   
+      // // Concatenate file name with UUID
       // const fileIdWithUUID = `${fileName}-${uuid}`;
   
+      // // Create a reference to the file in Storage
       // const imageRef = ref(storage, `images/${fileIdWithUUID}`);
-
+  // Decode the URL to handle encoded characters
 const decodedUrl = decodeURIComponent(imageUrl);
 
+// Extract the file name from the decoded URL
 const fileName = decodedUrl.split('/').pop().split('?')[0];
 
+// Concatenate file name with UUID
 const fileIdWithUUID = `${fileName}`;
 
+// Create a reference to the file in Storage
 const imageRef = ref(storage, `images/${fileIdWithUUID}`);
+      // Delete the file from Storage
       await deleteObject(imageRef).then(() => {
         console.log('File deleted successfully');
       }).catch((error) => {
@@ -75,6 +83,7 @@ const imageRef = ref(storage, `images/${fileIdWithUUID}`);
       });
     } catch (error) {
       console.error('Error deleting image:', error);
+      // Check for specific errors like "not found"
     }
   };
   
