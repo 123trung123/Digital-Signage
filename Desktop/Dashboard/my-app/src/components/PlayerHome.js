@@ -785,9 +785,9 @@ const PlayerHome = ({ isOnline, otherMachineStatus }) => {
   return (
     <div className="home-container">
       <h2>Player List</h2>
-      <ul>
+      <ul className='account-ul'>
         {machineIds.map(machineId => (
-          <li key={machineId}>
+          <li key={machineId}class="account-li" >
             Player: {machineId}: <span className="status-indicator" style={{ backgroundColor: otherMachineStatus[machineId]?.state === 'online' ? 'green' : 'red' }} /> {otherMachineStatus[machineId]?.state}
           </li>
         ))}

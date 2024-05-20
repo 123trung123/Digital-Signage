@@ -89,27 +89,7 @@ body {
   transition: margin-left 0.5s ease-in-out, background-color 0.5s ease-in-out;
 }
 
-.upload-container {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
 
-.upload-button {
-  background-color: #27ae60; /* Modern green */
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
-}
-
-.upload-button:hover {
-  background-color: #2ecc71;
-}
 
 .logs-container {
   background-color: #fafafa;
@@ -350,6 +330,7 @@ h1 span {
 .dark-mode .dropdown-indicator,
 .dark-mode .machine-box,
 .dark-mode .image-item,
+.dark-mode .account-item,
 .dark-mode .container {
   background-color: #2e2e2e;
   color: var(--text-color);
@@ -397,7 +378,6 @@ h1 span {
   cursor: pointer;
 }
 
-/* Add semi-transparent overlay for content */
 .content::before {
   content: "";
   position: absolute;

@@ -31,7 +31,7 @@
   
   .machine-box {
     flex: 1 1 25%;
-    background: linear-gradient(to right, #0d6efd, #0dcaf0);
+    /* background: linear-gradient(to right, #0d6efd, #0dcaf0); */
     border: 1px solid #c2c2c2;
     width: 100%;
     max-width: 350px;
@@ -39,7 +39,7 @@
     transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
     width: calc(25% - 20px);
     height: auto;
-    padding: 10px;
+    padding: 5px;
   }
   
   .machine-box::-webkit-scrollbar {
@@ -51,7 +51,7 @@
   }
   
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 5px;
   }
   
   .machine-box.zoomed {
@@ -79,8 +79,8 @@
   
   .machine-box.zoomed::-webkit-scrollbar-thumb {
     background-color: #a6a6a6;
-    border-radius: 10px;
-    border: 2px solid rgba(255, 255, 255, 0.95);
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.95);
   }
   
   .machine-box.zoomed::-webkit-scrollbar-thumb:hover {
@@ -102,9 +102,9 @@
     margin-bottom: 20px;
     position: relative;
     padding: 10px;
-    border: 1px solid #c2c2c2;
+    /* border: 1px solid #c2c2c2; */
     border-radius: 8px;
-    background: #f5f5f5;
+    /* background: #f5f5f5; */
   }
   
   .image-item img {
@@ -196,7 +196,7 @@
     cursor: pointer;
     padding: 20px;
     text-align: center;
-    background: #d2d2d2;
+    background: #ececec;;
     position: sticky;
     top: 0;
     z-index: 100;
@@ -213,6 +213,7 @@
     transition: max-height 0.3s ease-in;
     max-height: 400px;
     overflow-y: auto;
+
   }
   
   .machine-header {
@@ -228,8 +229,33 @@
     background: linear-gradient(to right, #1a1a1a, #333);
     color: #f0f0f0;
   }
-.dark-mode .machine-box {
+  .dark-mode .dropdown-indicator{
+    background: #333;
+  }
+/* .dark-mode .machine-box {
     background: linear-gradient(to right, #1a1a1a, #333);
     border: 1px solid #c2c2c2;
 
+  } */
+  .account-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .account-li {
+    display: block;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  .account-details {
+    flex-grow: 1;
+  }
+  .account-ul{
+    max-height: 400px;
+    overflow-y: auto;
   }

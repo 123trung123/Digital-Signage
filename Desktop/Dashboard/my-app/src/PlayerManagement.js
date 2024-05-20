@@ -33,7 +33,7 @@ const PlayerManagement = () => {
       setLoading(true); 
       setTimeout(() => {
         window.location.href = window.location.href; 
-      }, 5000);
+      }, 500);
       fetchAccounts();
     } catch (error) {
       setError(error.message);
@@ -129,12 +129,12 @@ const PlayerManagement = () => {
       <button onClick={fetchAccounts} className="button">Fetch Accounts</button>
       <ul>
         {accounts.map((account, index) => (
-          <li key={index}>
+          <li key={index}className="account-item">
             <div>
               <p>Email: {account.email}</p>
               <p>Password: {account.password}</p>
               <p>UID: {account.uid}</p>
-              <p>Type: {account.type}</p> {/* Display the account type */}
+              <p>Type: {account.type}</p> 
             </div>
             <button className="delete-button" onClick={() => handleDeleteAccount(account.id, account.uid)}>Delete</button>
           </li>

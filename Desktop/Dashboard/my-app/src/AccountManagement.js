@@ -177,9 +177,9 @@ const AccountManagement = () => {
       setEmail('');
       setPassword('');
       setLoading(true);
-      setTimeout(() => {
-        window.location.href = window.location.href; 
-      }, 5000);
+      
+      window.location.href = window.location.href; 
+    
       fetchAccounts(); 
     } catch (error) {
       setError(error.message);
@@ -262,7 +262,7 @@ const AccountManagement = () => {
       <button onClick={fetchAccounts} className="button">Fetch Accounts</button>
       <ul>
         {accounts.map((account, index) => (
-          <li key={index}>
+          <li key={index}className="account-item">
             <div>
               <p>Email: {account.email}</p>
               <p>Password: {account.password}</p>
