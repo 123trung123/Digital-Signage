@@ -9,6 +9,7 @@ import AccountManagement from './pages/Admin-Management/AccountManagement';
 import PlayerManagement from './pages/Player-Management/PlayerManagement';
 import PlayerHome from './pages/Player-Management/PlayerHome';
 import AdminHome from './pages/Admin-Management/AdminHome';
+import Footer from './pages/Footer/Footer';
 
 // Firebase configuration and initialization
 import firebaseConfig from './firebaseconfig-key/firebaseConfig';
@@ -169,7 +170,7 @@ const App = () => {
     <div className={isDarkMode ? 'app-container dark-mode' : 'app-container'}>
     <div className="upper_bar">
     
-    <span className="top-bar-title"><img src="../icon.png" alt="Icon" className="title-icon" /> DSS Player</span>
+    <span className="top-bar-title"><img src="../icon.png" alt="Icon" className="title-icon" /> DSS Signage</span>
         <button onClick={toggleDarkMode} className="navToggleButton">
           <img src={isDarkMode ? "../Sun.png" : "../Moon.png"}  className="toggle-icon" />
         </button>
@@ -222,6 +223,7 @@ const App = () => {
           </Routes> 
         </div>
       </div>
+      <Footer />
     </BrowserRouter>
   );
 };

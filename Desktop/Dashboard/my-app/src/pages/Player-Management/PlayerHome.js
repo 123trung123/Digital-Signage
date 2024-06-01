@@ -234,6 +234,24 @@ const PlayerHome = ({ isOnline, otherMachineStatus }) => {
       setInfoModalOpen(true);
     }
   };
+  // const handlePlayModeChangeButton = (e, docId, newMode) => {
+  //   e.stopPropagation();
+  //   handlePlayModeChange(docId, newMode);
+  // };
+  // const handlePlayModeChange = async (docId, newMode) => {
+  //   try {
+  //     const docRef = doc(firestore, 'pins', docId);
+  //     await updateDoc(docRef, { playMode: newMode });
+  //     console.log('Play mode updated successfully.');
+  //   } catch (error) {
+  //     console.error('Error updating play mode:', error);
+  //   }
+  // };
+  const handlePlayModeChangeButton = (e, docId, newMode) => {
+    e.stopPropagation();
+    // handlePlayModeChange(docId, newMode);
+  };
+  
   const handlePlayModeChange = async (docId, newMode) => {
     try {
       const docRef = doc(firestore, 'pins', docId);
@@ -257,21 +275,23 @@ const PlayerHome = ({ isOnline, otherMachineStatus }) => {
           {machineIsOpen['Store'] && (
             <div className="images">
               {storeImages.map(image => (
-                <div key={image.id} className={`image-item ${image.isActive ? '' : 'inactive'} ${selectedImage && selectedImage.docId === image.id ? 'selected' : ''}`} onClick={() => handleImageSelect(image.imageUrl, image.id)}>
-                  {image.type === 'video' ? (
-                    <video src={image.imageUrl} controls muted />
-                  ) : (
-                    <img src={image.imageUrl} alt={`Machine`} />
-                  )}
-                  <label onClick={(e) => handleCheckboxClick(e, image.id, image.isActive)}>
-                    <input
-                      type="checkbox"
-                      checked={image.isActive}
-                      onChange={() => toggleActiveStatus(image.id, image.isActive)}
-                    />
-                    {image.isActive ? "Active" : "Inactive"}
-                  </label>
-                  <button onClick={() => openTimeFrameModal(image)}>Set Time</button>
+                <div className="label-button-container">
+                  <div key={image.id} className={`image-item ${image.isActive ? '' : 'inactive'} ${selectedImage && selectedImage.docId === image.id ? 'selected' : ''}`} onClick={() => handleImageSelect(image.imageUrl, image.id)}>
+                    {image.type === 'video' ? (
+                      <video src={image.imageUrl} controls muted />
+                    ) : (
+                      <img src={image.imageUrl} alt={`Machine`} />
+                    )}
+                    <label onClick={(e) => handleCheckboxClick(e, image.id, image.isActive)}>
+                      <input
+                        type="checkbox"
+                        checked={image.isActive}
+                        onChange={() => toggleActiveStatus(image.id, image.isActive)}
+                      />
+                      {image.isActive ? "Active" : "Inactive"}
+                    </label>
+                    <button onClick={() => openTimeFrameModal(image)}>Set Time</button>
+                  </div>
                 </div>
               ))}
             </div>
@@ -302,6 +322,7 @@ const PlayerHome = ({ isOnline, otherMachineStatus }) => {
                       ) : (
                         <img src={image.imageUrl} alt={`Machine`} />
                       )}
+                      <div className="select-container">
                       <label onClick={(e) => handleCheckboxClick(e, image.id, image.isActive)}>
                         <input
                           type="checkbox"
@@ -310,14 +331,25 @@ const PlayerHome = ({ isOnline, otherMachineStatus }) => {
                         />
                         {image.isActive ? "Active" : "Inactive"}
                       </label>
-                      <label>Play Mode:</label>
-                        <select
+                      {/* <label>Play Mode:</label>
+                        <select onClick={(e) => handlePlayModeChangeButton(e, image.id, image.playMode)}
                           value={image.playMode}
-                          onChange={(e) => handlePlayModeChange(image.id, e.target.value)}
+                          onChange={(e) => handlePlayModeChange( image.id, e.target.value)}
                         >
                           <option value="alwaysOn">Always On</option>
                           <option value="timeBased">Time-Based</option>
-                        </select>
+                        </select> */}
+                        
+                          <p>Play Mode:</p>
+                          <select onClick={(e) => handlePlayModeChangeButton(e, image.id, image.playMode)}
+                            id={`playMode-${image.id}`}
+                            value={image.playMode}
+                            onChange={(e) => handlePlayModeChange(image.id, e.target.value)}
+                          >
+                            <option value="alwaysOn">Always On</option>
+                            <option value="timeBased">Time-Based</option>
+                          </select>
+                        </div>
                       <button onClick={() => openTimeFrameModal(image)}>Set Time</button>
                     </div>
                   ))}

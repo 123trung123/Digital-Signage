@@ -242,10 +242,6 @@ const PlayerHome = ({ isOnline, otherMachineStatus }) => {
   const [zoomedMachine, setZoomedMachine] = useState(null);
   const [timeFrame, setTimeFrame] = useState({ startTime: '', endTime: '' });
 
-  const [infoModalOpen, setInfoModalOpen] = useState(false);
-  const [infoContent, setInfoContent] = useState(null); 
-
-
   const toggleMachineBox = (machineId) => {
     setMachineIsOpen({ ...machineIsOpen, [machineId]: !machineIsOpen[machineId] });
   };
@@ -383,28 +379,16 @@ const PlayerHome = ({ isOnline, otherMachineStatus }) => {
     setTimeFrameModalOpen(true);
   };
 
-
-
-
-  
-  const handleShowInfo = (machineId) => {
-    const account = accounts.find(account => account.uid === machineId);
-    if (account) {
-      setInfoContent(account);
-      setInfoModalOpen(true);
-    }
-  };
-  
   return (
     <div className="home-container">
-      <h2>Player-Management</h2>
-      {/* <ul className='account-ul'>
+      <h2>Player List</h2>
+      <ul className='account-ul'>
         {machineIds.map(machineId => (
           <li key={machineId}className="account-li" >
             Player: {machineId}: <span className="status-indicator" style={{ backgroundColor: otherMachineStatus[machineId]?.state === 'online' ? 'green' : 'red' }} /> {otherMachineStatus[machineId]?.state}
           </li>
         ))}
-      </ul> */}
+      </ul>
       <div className="flex-box">
         <div className={`machine-box ${machineIsOpen['Store'] ? 'open' : ''} ${zoomedMachine === 'Store' ? 'zoomed' : ''}`}>
           <div className="machine-header" onClick={() => toggleMachineBox('Store')}>
