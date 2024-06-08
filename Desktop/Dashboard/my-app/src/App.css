@@ -14,6 +14,7 @@ body {
   width: 24px;
   height: 24px;
 }
+
 .toggle-icon{
   text-align: center;
   width: 24px;
@@ -46,14 +47,14 @@ body {
   font-weight: bold;
   background-color: #1a71ce;
 }
-.navButton, .signin-container button, .upload-button, .button {
+.signin-container button, .upload-button, .button {
   background-color: #3498db; 
   
   color: #fff;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
-
+  
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -78,16 +79,18 @@ body {
 
 
 .navButton {
-  height: 3vh;
-  margin: 5px 10px 5px 10px;
-  padding: 10px 20px;
+  background-color: #3498db; 
+  margin: 10px 10px ;
+  padding: 22px 20px;
   border: none;
   border-radius: 5px;
   color: #fff;
-  text-decoration: none;
+  font-size: 20px;
+  font-style: italic;
   font-weight: bold;
   display: block;
   text-align: center; 
+  justify-content: center;
   transition: background-color 0.3s ease;
 }
 
@@ -100,6 +103,7 @@ body {
 
 .top-bar-title {
   margin-bottom: 2%;
+  padding-top: 1%;
   text-align: center; 
   font-size: 2.25vh; 
   font-weight: bold;
@@ -143,7 +147,7 @@ body {
 }
 
 .signin-container {
-  background-color: #fafafa;
+  background-color: #bebebe;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
