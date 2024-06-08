@@ -10,7 +10,7 @@ body {
   border-radius: 8px;
   border: 1px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  /* margin-bottom: 20px; */
+  margin-bottom: 5px;
 }
 .dark-mode .gallery {
   background: linear-gradient(to right, #1a1a1a, #333);
@@ -80,7 +80,7 @@ body {
 
 .upload-field input[type="file"] {
   width: 100%;
-  padding: 10px;
+  padding: 15px;
   background-color: #3498db;
   color: #ffffff;
   border: none;

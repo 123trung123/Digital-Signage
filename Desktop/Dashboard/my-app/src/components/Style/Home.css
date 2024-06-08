@@ -66,7 +66,9 @@
   .log-container .home-container {
     padding: 20px;
   }
-  
+  .home-container{
+    margin-bottom: 5px;
+  }
   .log-container .machine-box {
     flex: 1 1 calc(33.33% - 20px);
     margin-bottom: 20px;
@@ -168,7 +170,7 @@
     white-space: normal;
     background: rgba(116, 101, 101, 0.9);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-size: calc(0.75vw + 0.75vh);
+    font-size: calc(0.50vw + 0.50vh);
     z-index: 1;
     padding: 5px;
     border-radius: 4px;
@@ -224,6 +226,7 @@
     max-height: 150px;
     cursor: pointer;
     border: 2px solid transparent;
+
   }
   
   .log-container .dropdown-indicator {
