@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link, NavLink } from 'react-router-dom';
-
 // Components
 import Signin from './components/auth/Signin';
 import Logs from './pages/Home/Logs';
@@ -191,10 +190,9 @@ const App = () => {
               )}
               {user && (
                 <>
-                  {/* <Link to="/" className="navButton">Home</Link> */}
                   <p className="nav-heading">GENERAL</p>
                   <NavLink  to="/Home" className="navButton">Dashboard</NavLink>
-                  <p className="nav-heading">MANAGEMENT</p>
+                  <p className="nav-heading2">MANAGEMENT</p>
                   <NavLink  to="/Assets" className="navButton">Asset</NavLink>
                   <NavLink  to="/player" className="navButton">Player</NavLink>
                   <NavLink  to="/account-management" className="navButton">Admin</NavLink>
@@ -205,7 +203,6 @@ const App = () => {
         <div className="content">
           <Routes>
             <Route path="/signin" element={<Signin setUser={setUser} />} />
-            {/* <Route path="/" element={<Home user={user} isOnline={isOnline} otherMachineStatus={otherMachineStatus} pins={pins} imageUrls={imageUrls} />} /> */}
             <Route path="/Home" element={<Logs pins={pins} imageUrls={imageUrls} imageUpload={imageUpload} otherMachineStatus={otherMachineStatus} setImageUpload={setImageUpload} uploadFile={uploadFile} />} />
             <Route path="/Assets" element={<Upload pins={pins} imageUrls={imageUrls} imageUpload={imageUpload} otherMachineStatus={otherMachineStatus} setImageUpload={setImageUpload} uploadFile={uploadFile} uuid={v4()} />} />
             <Route path="/account-management/*" element={

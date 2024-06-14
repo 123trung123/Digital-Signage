@@ -37,7 +37,18 @@ body {
 }
 .nav-heading {
   font-weight: bold;
-  font-size: 16px;
+  font-size: 18px;
+  text-decoration: underline;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  color: #fff; 
+  padding: 10px;
+}
+.nav-heading2 {
+  font-weight: bold;
+  font-size: 18px;
+  text-decoration: underline;
+  margin-top: 40px;
   margin-bottom: 5px;
   text-transform: uppercase;
   color: #fff; 
@@ -364,7 +375,6 @@ h1 span {
 }
 
 .navToggleButton {
-  
   padding: 5px 10px;
   position: relative;
   border: none;
@@ -377,7 +387,10 @@ h1 span {
   bottom: 0;
   left: 0;
 }
-
+.navToggleButton:hover {
+  scale: 1.05;
+  transition: all 0.3s ease;
+}
 .nav.hidden {
   transform: translateX(-100%);
 }
@@ -431,6 +444,10 @@ h1 span {
   color: #fff;
   text-decoration: none;
   font-weight: bold;
+}
+.Delete:hover{
+  scale: 1.05;
+  transition: all 0.3s ease;
 }
 .logoutContainer {
   margin-top: auto;
