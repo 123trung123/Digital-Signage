@@ -145,7 +145,7 @@ const Log = ({ otherMachineStatus }) => {
         </div>
         <div className="log-chart">
           <h2>Assets</h2>
-          <ul>
+          <ul className= "Size-Asset-Info">
             {pictures.map((picture, index) => (
               <li key={index}>
                 <div className='Assets-padding'><strong>Name:</strong> {picture.name}</div>
