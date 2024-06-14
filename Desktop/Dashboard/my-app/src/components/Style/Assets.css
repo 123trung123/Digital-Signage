@@ -106,7 +106,8 @@ body {
 
 .upload-button {
   width: 100%;
-  padding: 12px;
+  padding: 15px;
+  font-weight: bold;
   background-color: #3498db;
   color: #ffffff;
   border: none;
@@ -126,7 +127,9 @@ body {
   background-color: #1f5a85;
   transform: translateY(0);
 }
-
+.h2{
+  padding: 10px;
+}
 @media (max-width: 768px) {
   .gallery {
     padding: 10px;

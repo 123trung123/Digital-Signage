@@ -2,10 +2,14 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    font-size: 16px;
     font-family: 'Roboto', sans-serif;
     transition: all 0.5s ease-in-out;
   }
-  
+  .Assets-padding{
+    padding-top: 15px;
+    padding-bottom: 5px;
+  }
   .log-container .nav {
     flex: 0 0 20%;
     max-width: 250px;
@@ -163,19 +167,14 @@
     white-space: nowrap;
     transition: white-space 0.3s ease;
     transition: all 0.3s ease;
-    position: relative;
   }
   
   .machine-header h3:hover {
     white-space: normal;
+    scale: 1.05;
     background: rgba(116, 101, 101, 0.9);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-size: calc(0.50vw + 0.50vh);
-    z-index: 1;
     padding: 5px;
-    border-radius: 4px;
-    max-width: none;
-    width: auto;
   }
   
   .log-container .machine-box h3 .status-indicator {
