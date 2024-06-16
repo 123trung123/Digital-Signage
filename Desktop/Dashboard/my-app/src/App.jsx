@@ -9,6 +9,7 @@ import PlayerManagement from './pages/Player-Management/PlayerManagement';
 import PlayerHome from './pages/Player-Management/PlayerHome';
 import AdminHome from './pages/Admin-Management/AdminHome';
 import Footer from './pages/Footer/Footer';
+import SystemLogs from './pages/Logs/System';
 
 // Firebase configuration and initialization
 import firebaseConfig from './firebaseconfig-key/firebaseConfig';
@@ -36,7 +37,7 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [isOnline, setIsOnline] = useState(true);
   const [otherMachineStatus, setOtherMachineStatus] = useState({});
-  const [initialLoad, setInitialLoad] = useState(true); // New flag
+  const [initialLoad, setInitialLoad] = useState(true);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const handleLogout = () => {
     signOut(auth)
@@ -171,7 +172,7 @@ const App = () => {
     
     <span className="top-bar-title"><img src="../icon.png" alt="Icon" className="title-icon" /> DSS Signage</span>
         <button onClick={toggleDarkMode} className="navToggleButton">
-          <img src={isDarkMode ? "../Sun.png" : "../Moon.png"}  className="toggle-icon" />
+          <img src={isDarkMode ? "../Sun.png" : "../Moon.png"} alt={isDarkMode ? "Sun Icon" : "Moon Icon"} className="toggle-icon" />
         </button>
           
           {user && (
@@ -196,6 +197,7 @@ const App = () => {
                   <NavLink  to="/Assets" className="navButton">Asset</NavLink>
                   <NavLink  to="/player" className="navButton">Player</NavLink>
                   <NavLink  to="/account-management" className="navButton">Admin</NavLink>
+                  <NavLink to="/system-logs" className="navButton">System Logs</NavLink> {/* New Link for System Logs */}
                 </>
               )}
             </div>
@@ -217,6 +219,7 @@ const App = () => {
                 <PlayerManagement />
               </>
             } />
+            <Route path="/system-logs" element={<SystemLogs otherMachineStatus={otherMachineStatus} />} /> {/* New Route for System Logs */}
           </Routes> 
         </div>
       </div>
