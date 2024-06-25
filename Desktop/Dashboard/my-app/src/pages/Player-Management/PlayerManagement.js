@@ -27,7 +27,7 @@ const PlayerManagement = () => {
         type: 'PLAYER' 
       });
 
-      alert('Account created successfully!');
+      // alert('Account created successfully!');
       setEmail('');
       setPassword('');
       setLoading(true); 
@@ -103,7 +103,7 @@ const PlayerManagement = () => {
         className="form-control"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        placeholder="Enter your email"
+        placeholder="Player email"
         required
       />
     </div>
@@ -115,7 +115,7 @@ const PlayerManagement = () => {
         className="form-control"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        placeholder="Enter your password"
+        placeholder="Enter Password"
         required
       />
     </div>
