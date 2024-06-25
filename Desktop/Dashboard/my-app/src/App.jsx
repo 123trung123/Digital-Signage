@@ -39,6 +39,7 @@ const App = () => {
   const [otherMachineStatus, setOtherMachineStatus] = useState({});
   const [initialLoad, setInitialLoad] = useState(true);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [showDropdown, toggleDropdown] = useState(false);
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
@@ -175,11 +176,21 @@ const App = () => {
           <img src={isDarkMode ? "../Sun.png" : "../Moon.png"} alt={isDarkMode ? "Sun Icon" : "Moon Icon"} className="toggle-icon" />
         </button>
           
-          {user && (
-            <div className="logoutContainer">
-              <button onClick={handleLogout} className="Delete">Logout</button>
-            </div>
-          )}
+          <div className="accountDropdown">
+            {user && (
+              <>
+                <button onClick={toggleDropdown} className="accountButton">
+                  <img src="../Icons/user.png" alt="Account Icon" className="accountIcon" />
+                </button>
+                {showDropdown && (
+                  <div className="dropdownContent">
+                    <p>{user.email}</p>
+                    <button onClick={handleLogout} className="Delete">Logout</button>
+                  </div>
+                )}
+              </>
+            )}
+          </div>
         </div>
 
           <div className="nav">

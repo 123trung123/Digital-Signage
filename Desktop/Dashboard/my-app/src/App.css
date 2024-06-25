@@ -500,3 +500,40 @@ body, html, #root {
   overflow: auto;
   padding-bottom: 40px;
 }
+.accountButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  padding-right: 40px;
+}
+
+.accountIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.dropdownContent {
+  border-radius: 6px;
+  display: none;
+  position: relative;
+  background-color: #d4d4d4;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  z-index: 1;
+}
+
+.accountDropdown:hover .dropdownContent {
+  display: block;
+}
+
+.dropdownContent p {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.dropdownLogoutButton:hover {
+  background-color: #d32f2f;
+}
