@@ -20,7 +20,12 @@ body {
   width: 24px;
   height: 22px;
 }
-
+.navIcon {
+  align-items: center;
+  padding-right: 20px;
+  width: 24px;
+  height: 24px;
+}
 .nav {
   display: flex;
   margin-top: 65px;
@@ -97,10 +102,9 @@ body {
   border-radius: 5px;
   color: #fff;
   font-size: 20px;
-  font-style: italic;
   font-weight: bold;
   display: block;
-  text-align: center; 
+  /* text-align: center;  */
   justify-content: center;
   transition: background-color 0.3s ease;
 }
@@ -367,8 +371,6 @@ h1 span {
 .dark-mode .navButton.active,
 .dark-mode .machine-box.zoomed,
 .dark-mode .info-modal,
-
-
 .dark-mode .container {
   background-color: #2e2e2e;
   color: var(--text-color);
@@ -430,7 +432,6 @@ h1 span {
   z-index: -1;
   transition: background 0.5s ease-in-out;
 }
-
 .dark-mode .content::before {
   background: rgba(255, 255, 255, 0.1);
 }
@@ -452,7 +453,6 @@ h1 span {
 .logoutContainer {
   margin-top: auto;
 }
-
 .upper_bar {
   display: flex;
   border-bottom: 1px solid white;

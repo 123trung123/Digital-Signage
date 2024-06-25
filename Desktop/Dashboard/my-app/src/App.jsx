@@ -192,12 +192,22 @@ const App = () => {
               {user && (
                 <>
                   <p className="nav-heading">GENERAL</p>
-                  <NavLink  to="/Home" className="navButton">Dashboard</NavLink>
+                  <NavLink to="/Home" className="navButton">
+                    <img src="../Icons/analysis.png" alt="Home Icon" className="navIcon" /> Dashboard
+                  </NavLink>
                   <p className="nav-heading2">MANAGEMENT</p>
-                  <NavLink  to="/Assets" className="navButton">Asset</NavLink>
-                  <NavLink  to="/player" className="navButton">Player</NavLink>
-                  <NavLink  to="/account-management" className="navButton">Admin</NavLink>
-                  <NavLink to="/system-logs" className="navButton">System Logs</NavLink> {/* New Link for System Logs */}
+                  <NavLink to="/Assets" className="navButton">
+                    <img src="../Icons/image.png" alt="Assets Icon" className="navIcon" /> Asset
+                  </NavLink>
+                  <NavLink to="/player" className="navButton">
+                    <img src="../Icons/video.png" alt="Player Icon" className="navIcon" /> Player
+                  </NavLink>
+                  <NavLink to="/account-management" className="navButton">
+                    <img src="../Icons/user.png" alt="Admin Icon" className="navIcon" /> Admin
+                  </NavLink>
+                  <NavLink to="/system-logs" className="navButton">
+                    <img src="../Icons/log.png" alt="System Logs Icon" className="navIcon" /> System Logs
+                  </NavLink>
                 </>
               )}
             </div>
