@@ -103,14 +103,11 @@ const fileIdWithUUID = `${fileName}`;
 
       <div className="upload-container">
         <h2>Upload</h2>
-        <div className="upload-field">
-          <input type="file" onChange={handleFileChange} />
-          {previewUrl && <img src={previewUrl} alt="Uploaded" />}
-        </div>
-        {/* <div className="activation-toggle">
-          <label htmlFor="activationToggle">Active:</label>
-          <input type="checkbox" id="activationToggle" checked={isActive} onChange={toggleActivation} />
-        </div> */}
+        <div class="upload-field">
+        <input type="file" id="file-upload" onchange="handleFileChange(event)" />
+        <label for="file-upload">Choose File</label>
+        <div id="preview-container"></div>
+    </div>
         <button className="upload-button" onClick={handleFileUpload} disabled={isUploading}>
           {isUploading ? 'Uploading...' : 'Upload Asset'}
         </button>
