@@ -125,9 +125,11 @@
   
   .log-container .machine-header {
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease;   
   }
-  
+  .machine-box .machine-header{
+    min-height: 100px;
+  }
   .log-container .machine-header:hover {
     background-color: #f0f0f0;
   }

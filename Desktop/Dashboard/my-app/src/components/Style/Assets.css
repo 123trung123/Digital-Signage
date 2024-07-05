@@ -74,20 +74,27 @@ body {
   background: linear-gradient(to right, #1a1a1a, #333);
 }
 .upload-field {
-  width: 100%;
   margin-bottom: 20px;
-}
-
-.upload-field input[type="file"] {
   width: 100%;
   padding: 15px;
   background-color: #3498db;
+  font-size: 16px;
+  font-weight: bold;
   color: #ffffff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.5s ease;
   box-sizing: border-box;
+  text-align: center;
+  transition: 0.3s;
+}
+.upload-field:hover{
+  background-color: #2980b9;
+  transform: translateY(-2px);
+}
+.upload-field input[type="file"] {
+  display: none;
 }
 
 .upload-field img {
@@ -127,9 +134,7 @@ body {
   background-color: #1f5a85;
   transform: translateY(0);
 }
-.h2{
-  padding: 10px;
-}
+
 @media (max-width: 768px) {
   .gallery {
     padding: 10px;

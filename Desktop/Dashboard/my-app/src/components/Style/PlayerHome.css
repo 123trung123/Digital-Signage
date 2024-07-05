@@ -10,7 +10,12 @@
   .dark-mode .home-container {
     background: linear-gradient(to right, #1a1a1a, #333);
   }
-  
+  .input-icon {
+    align-items: center;
+    padding-right: 20px;
+    width: 24px;
+    height: 24px;
+  }
   .flex-box {
     display: flex;
     flex-wrap: wrap;
