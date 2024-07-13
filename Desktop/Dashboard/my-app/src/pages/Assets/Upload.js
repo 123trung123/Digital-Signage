@@ -3,17 +3,18 @@ import { collection, onSnapshot, getFirestore, doc, deleteDoc } from 'firebase/f
 import { storage } from '../../firebaseconfig-key/firebaseConfig';
 import { ref, deleteObject } from 'firebase/storage';
 import '../../components/Style/Assets.css';
+
 const firestore = getFirestore();
 
-const Upload = ({ imageUpload, setImageUpload, uploadFile, uuid,type }) => {
+const Upload = ({ imageUpload, setImageUpload, uploadFile, uuid, type }) => {
   const [previewUrl, setPreviewUrl] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
-  const [isActive, setIsActive] = useState(true); 
+  const [isActive, setIsActive] = useState(true);
   const [imageUrls, setImageUrls] = useState([]);
 
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(firestore, 'pins'), (snapshot) => {
-      const urls = snapshot.docs.map(doc => ({ id: doc.id, url: doc.data().imageUrl, type:doc.data().type }));
+      const urls = snapshot.docs.map(doc => ({ id: doc.id, url: doc.data().imageUrl, type: doc.data().type }));
       setImageUrls(urls);
     });
 
@@ -47,67 +48,68 @@ const Upload = ({ imageUpload, setImageUpload, uploadFile, uuid,type }) => {
   };
 
   const toggleActivation = () => {
-    setIsActive(!isActive); 
+    setIsActive(!isActive);
   };
 
-  const handleDelete = async (imageUrl, imageId, uuid) => {
+  const handleDelete = async (imageUrl, imageId) => {
     try {
       await deleteDoc(doc(firestore, 'pins', imageId));
-  
-      // const fileName = imageUrl.split('/').pop().split('?')[0];
-  
-      // const fileIdWithUUID = `${fileName}-${uuid}`;
-  
-      // const imageRef = ref(storage, `images/${fileIdWithUUID}`);
 
-const decodedUrl = decodeURIComponent(imageUrl);
+      const decodedUrl = decodeURIComponent(imageUrl);
+      const fileName = decodedUrl.split('/').pop().split('?')[0];
+      const fileIdWithUUID = `${fileName}`;
 
-const fileName = decodedUrl.split('/').pop().split('?')[0];
-
-const fileIdWithUUID = `${fileName}`;
-
-  	const imageRef = ref(storage, `images/${fileIdWithUUID}`);
+      const imageRef = ref(storage, `images/${fileIdWithUUID}`);
       await deleteObject(imageRef).then(() => {
         console.log('File deleted successfully');
       }).catch((error) => {
         console.error('Error deleting image:', error);
       });
-    const videoRef = ref(storage, `videos/${fileIdWithUUID}`);
-    await deleteObject(videoRef).then(() => {
-      console.log('Video file deleted successfully');
-    }).catch((error) => {
-      console.error('Error deleting video file:', error);
-    });
+
+      const videoRef = ref(storage, `videos/${fileIdWithUUID}`);
+      await deleteObject(videoRef).then(() => {
+        console.log('Video file deleted successfully');
+      }).catch((error) => {
+        console.error('Error deleting video file:', error);
+      });
     } catch (error) {
       console.error('Error deleting image:', error);
     }
   };
-  
+
   return (
     <div>
       <div className="gallery">
         <h2>Gallery</h2>
         <div className="image-list">
           {imageUrls.map(({ id, url, type }) => (
-          <div key={id} className="image-item">
-            {type === "image" ? (
-              <img src={url} alt="Uploaded" />
-            ) : (
-              <video src={url} controls />
-            )}
-            <button onClick={() => handleDelete(url, id, uuid)}>Delete</button>
-          </div>
+            <div key={id} className="image-item">
+              {type === "image" ? (
+                <img src={url} alt="Uploaded" className="preview-small" />
+              ) : (
+                <video src={url} controls className="preview-small" />
+              )}
+              <button onClick={() => handleDelete(url, id)}>Delete</button>
+            </div>
           ))}
         </div>
       </div>
 
       <div className="upload-container">
         <h2>Upload</h2>
-        <div class="upload-field">
-        <input type="file" id="file-upload" onchange="handleFileChange(event)" />
-        <label for="file-upload">Choose File</label>
-        <div id="preview-container"></div>
-    </div>
+        <div className="upload-field">
+          <input type="file" id="file-upload" onChange={handleFileChange} />
+          <label htmlFor="file-upload">Choose File</label>
+          {previewUrl && (
+            <div id="preview-container">
+              {imageUpload.type.startsWith('image/') ? (
+                <img src={previewUrl} alt="Preview" className="preview-small" />
+              ) : (
+                <video src={previewUrl} controls className="preview-small" />
+              )}
+            </div>
+          )}
+        </div>
         <button className="upload-button" onClick={handleFileUpload} disabled={isUploading}>
           {isUploading ? 'Uploading...' : 'Upload Asset'}
         </button>
