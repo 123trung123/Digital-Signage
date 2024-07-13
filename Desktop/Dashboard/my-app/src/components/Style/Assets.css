@@ -89,6 +89,11 @@ body {
   text-align: center;
   transition: 0.3s;
 }
+.preview-small {
+  width: 150px;
+  height: auto;
+  max-height: 150px;
+}
 .upload-field:hover{
   background-color: #2980b9;
   transform: translateY(-2px);
